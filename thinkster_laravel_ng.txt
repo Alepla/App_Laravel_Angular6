@@ -1,0 +1,91 @@
+--------------------------------------------- Update PHP ------------------------------------------------
+$ sudo ./install.sh
+$ php -v        //PHP 5.6.35
+
+------------------------------------------ @angular/cli@latest ------------------------------------------
+    $ node -v     v6.11.2
+    $ npm -v      3.10.10
+    Actualitzar @angular/cli@latest
+        $ sudo npm uninstall -g @angular/cli
+        $ sudo npm cache clean
+        $ sudo npm install -g @angular/cli@latest
+    
+---------------------------------- conduit_laravel_ng5 ----------------------------------------------------
+https://github.com/gothinkster/laravel-realworld-example-app
+https://github.com/gothinkster/angular-realworld-example-app
+
+$ git clone git://github.com/gothinkster/laravel-realworld-example-app.git conduit_laravel
+$ git clone git://github.com/gothinkster/angular-realworld-example-app.git conduit_ng
+
+----------------------------------------- Client -----------------------------------------------------------
+$ cd conduit_ng/
+$ sudo npm install
+- environment.ts: api_url: 'https://laravel2-1-yomogan.c9users.io/conduit_laravel/public/api'
+$ sudo ng build
+$ sudo ng serve --host 0.0.0.0 --port 8081 --public laravel2-1-yomogan.c9users.io
+http://laravel2-1-yomogan.c9users.io:8081/ yomogan@gmail.com/Yomogan1
+
+----------------------------------------- Server ------------------------------------------------------------
+$ sudo chmod 777 -R conduit_laravel
+$ cd conduit_laravel/
+$ composer install
+- .env
+$ php artisan key:generate
+$ php artisan jwt:generate
+$ php artisan route:list
+- start apache&PHP
+- https://laravel2-1-yomogan.c9users.io/conduit_laravel/public/
+
+- sudo apt-get install php-mysql
+- mysql-ctl install
+- phpmyadmin-ctl install
+- https://laravel2-1-yomogan.c9users.io/phpmyadmin/
+- phpmyadmin: create database conduit_laravel_ng5; use conduit_laravel_ng5;
+- config/database.php
+- .env
+- php artisan migrate   
+- php artisan db:seed
+
+$ php artisan route:list
++--------+-----------+-------------------------------------------+------------------+-----------------------------------------------------+-----------------------+
+| Domain | Method    | URI                                       | Name             | Action                                              | Middleware            |
++--------+-----------+-------------------------------------------+------------------+-----------------------------------------------------+-----------------------+
+|        | GET|HEAD  | /                                         |                  | Closure                                             | web                   |
+|        | GET|HEAD  | api/articles                              | articles.index   | App\Http\Controllers\Api\ArticleController@index    | api,auth.api:optional |
+|        | POST      | api/articles                              | articles.store   | App\Http\Controllers\Api\ArticleController@store    | api,auth.api          |
+|        | GET|HEAD  | api/articles/feed                         |                  | App\Http\Controllers\Api\FeedController@index       | api,auth.api          |
+|        | PUT|PATCH | api/articles/{article}                    | articles.update  | App\Http\Controllers\Api\ArticleController@update   | api,auth.api          |
+|        | GET|HEAD  | api/articles/{article}                    | articles.show    | App\Http\Controllers\Api\ArticleController@show     | api,auth.api:optional |
+|        | DELETE    | api/articles/{article}                    | articles.destroy | App\Http\Controllers\Api\ArticleController@destroy  | api,auth.api          |
+|        | GET|HEAD  | api/articles/{article}/comments           | comments.index   | App\Http\Controllers\Api\CommentController@index    | api,auth.api:optional |
+|        | POST      | api/articles/{article}/comments           | comments.store   | App\Http\Controllers\Api\CommentController@store    | api,auth.api          |
+|        | DELETE    | api/articles/{article}/comments/{comment} | comments.destroy | App\Http\Controllers\Api\CommentController@destroy  | api,auth.api          |
+|        | DELETE    | api/articles/{article}/favorite           |                  | App\Http\Controllers\Api\FavoriteController@remove  | api,auth.api          |
+|        | POST      | api/articles/{article}/favorite           |                  | App\Http\Controllers\Api\FavoriteController@add     | api,auth.api          |
+|        | GET|HEAD  | api/profiles/{user}                       |                  | App\Http\Controllers\Api\ProfileController@show     | api,auth.api:optional |
+|        | DELETE    | api/profiles/{user}/follow                |                  | App\Http\Controllers\Api\ProfileController@unFollow | api,auth.api          |
+|        | POST      | api/profiles/{user}/follow                |                  | App\Http\Controllers\Api\ProfileController@follow   | api,auth.api          |
+|        | GET|HEAD  | api/tags                                  |                  | App\Http\Controllers\Api\TagController@index        | api                   |
+|        | GET|HEAD  | api/user                                  |                  | App\Http\Controllers\Api\UserController@index       | api,auth.api          |
+|        | PUT|PATCH | api/user                                  |                  | App\Http\Controllers\Api\UserController@update      | api,auth.api          |
+|        | POST      | api/users                                 |                  | App\Http\Controllers\Api\AuthController@register    | api                   |
+|        | POST      | api/users/login                           |                  | App\Http\Controllers\Api\AuthController@login       | api                   |
++--------+-----------+-------------------------------------------+------------------+-----------------------------------------------------+-----------------------+
+
+https://laravel2-1-yomogan.c9users.io/conduit_laravel/public/api/tags
+https://laravel2-1-yomogan.c9users.io/conduit_laravel/public/api/profiles/yomogan
+https://laravel2-1-yomogan.c9users.io/conduit_laravel/public/api/articles
+https://laravel2-1-yomogan.c9users.io/conduit_laravel/public/api/articles/ab-ipsum-et-dolores-iste
+https://laravel2-1-yomogan.c9users.io/conduit_laravel/public/api/articles?tag=corporis&limit=10&offset=0
+https://laravel2-1-yomogan.c9users.io/conduit_laravel/public/api/articles?author=yomogan&limit=10&offset=0
+
+- app/http/controllers/middleware/requests/kernel.php
+- RealWord/favorite/filters/follow/paginate/transformers
+- models: app/article, comment, tag, user
+- config/auth.php
+- jwt-auth:
+    - config/jwt.php
+    - app/http/middleware/AuthenticateWithJWT.php
+- config/cors.php: laravel-cors
+- database: migrations/seeds
+- routes/api.php
