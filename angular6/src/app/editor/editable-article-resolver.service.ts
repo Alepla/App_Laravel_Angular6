@@ -18,7 +18,7 @@ export class EditableArticleResolver implements Resolve<Article> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
-
+    //console.log("Route" + route);
     return this.articlesService.get(route.params['slug'])
       .pipe(
         map(
