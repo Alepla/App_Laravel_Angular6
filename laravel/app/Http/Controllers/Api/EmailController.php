@@ -1,18 +1,26 @@
 <?php 
 namespace App\Http\Controllers\Api;
-use Illuminate\Http\Request;
+use App\Http\Requests\Api\Contact;
 use Mail;
 
 class EmailController extends ApiController { 	
-    public function email(Request $request){
+    public function email( Contact $request ){
         $data = array(
-            'saludo' => $request->input('message')
+            'subject' => $request->input('contactMail.subject'),
+            'name' => $request->input('contactMail.name'),
+            'email' => $request->input('contactMail.email'),
+            'text' => $request->input('contactMail.message')
         );
         
-        $sent = Mail::send('email', $data , function ($message) use ($request){
-            $message->subject($request->input('subject'));
+        /*$sent = Mail::send('emailUser', $data , function ($message) use ($request){
+            $message->subject($request->input('contactMail.subject'));
             $message->from('holup@gmail.com', 'holup');
             $message->to($request->input('email'));
+        });*/
+        $sent = Mail::send('emailCompany', $data , function ($message) use ($request){
+            $message->subject("Problemas");
+            $message->from('holup@gmail.com', 'holup');
+            $message->to("daniortizgar@gmail.com");
         });
         if($sent) dd("something wrong"); //var_dump + exit
         
