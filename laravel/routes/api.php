@@ -41,6 +41,6 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('tags', 'TagController@index');
 
-    Route::get('sendemail','EmailController@email');
+    Route::post('sendemail','EmailController@email');
 
 });
