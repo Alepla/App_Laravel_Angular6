@@ -39,6 +39,7 @@ import { Contact, ContactService } from '../core';
     get f() { return this.contactForm.controls; }
 
     submitForm() {
+        this.updateContact(this.contactForm.value);
         //console.log(this.contact);
 
         this.isSubmitting = true;
@@ -60,9 +61,8 @@ import { Contact, ContactService } from '../core';
         Object.assign(this.contact, values);
     }
   }
-  
+
 /*this.toastr.successToastr('This is success toast.', 'Success!');
 this.toastr.errorToastr('This is error toast.', 'Oops!');
 this.toastr.warningToastr('This is warning toast.', 'Alert!');
-this.toastr.infoToastr('This is info toast.', 'Info');
-this.updateContact(this.contactForm.value);*/
+this.toastr.infoToastr('This is info toast.', 'Info');*/
