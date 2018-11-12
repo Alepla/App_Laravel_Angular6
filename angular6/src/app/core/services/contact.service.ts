@@ -14,6 +14,6 @@ export class ContactService {
 
     send(contactMail): Observable <Contact> {
         console.log(contactMail);
-        return this.apiService.post('/sendemail/', {contactMail: contactMail}).pipe(map(data => data.contactMail));
+        return this.apiService.get('/sendemail?message='+contactMail.email+'&subject='+contactMail.subject+'&email='+contactMail.email).pipe(map(data => data.message));
     }
 }

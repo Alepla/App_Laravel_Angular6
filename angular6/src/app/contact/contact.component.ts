@@ -47,11 +47,11 @@ import { Contact, ContactService } from '../core';
             return;
         }
 
-        /*this.contactService.send(this.contact).subscribe(data => {
+        this.contactService.send(this.contact).subscribe(data => {
             console.log(data);
             this.isSubmitting = false;
             //this.router.navigateByUrl('/');
-        });*/
+        });
 
     }
 
