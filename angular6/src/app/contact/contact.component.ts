@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import { Contact, ContactService } from '../core';
+import { Errors, Contact, ContactService } from '../core';
 
 @Component({
     selector: 'app-contact-page',
@@ -11,7 +11,7 @@ import { Contact, ContactService } from '../core';
   export class ContactComponent {
     contact: Contact = {} as Contact;
     contactForm: FormGroup;
-    errors: Object = {};
+    errors: Errors = {errors: {}};
     isSubmitting = false;
 
     constructor(
@@ -48,12 +48,20 @@ import { Contact, ContactService } from '../core';
             return;
         }
 
-        this.contactService.send(this.contact).subscribe(data => {
-            this.toastr.successToastr('The mail was send correctly.', 'Success!');
-            console.log(data);
-            this.isSubmitting = false;
-            //this.router.navigateByUrl('/');
-        });
+        this.contactService.send(this.contact).subscribe(
+            data => {
+                this.toastr.successToastr('The mail was send correctly.', 'Success!');
+                //console.log(data);
+                this.isSubmitting = false;
+                this.router.navigateByUrl('/');
+            },
+            err => {
+              this.errors = err;
+              //console.log(this.errors);
+              this.isSubmitting = false;
+            }
+        );
+    
 
     }
 

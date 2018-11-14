@@ -13,12 +13,10 @@ export class ContactService {
     ) {}
 
     send(contactMail): Observable <Contact> {
-        console.log(contactMail);
         return this.apiService.post('/sendemail/', {contactMail: contactMail})
         .pipe(map(
-            data => data.message,
-            err => {
-                console.log(err);
+            data => {
+                return data;
             }
         ));
     }
