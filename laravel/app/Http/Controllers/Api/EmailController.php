@@ -12,18 +12,18 @@ class EmailController extends ApiController {
             'text' => $request->input('contactMail.message')
         );
         
-        /*$sent = Mail::send('emailUser', $data , function ($message) use ($request){
+        $sent = Mail::send('email', $data , function ($message) use ($request){
             $message->subject($request->input('contactMail.subject'));
             $message->from('holup@gmail.com', 'holup');
-            $message->to($request->input('email'));
-        });*/
-        $sent = Mail::send('emailCompany', $data , function ($message) use ($request){
-            $message->subject("Problemas");
+            $message->to($request->input('contactMail.email'));
+        });
+        $sent = Mail::send('email', $data , function ($message) use ($request){
+            $message->subject($request->input('contactMail.subject'));
             $message->from('holup@gmail.com', 'holup');
             $message->to("daniortizgar@gmail.com");
         });
         if($sent) dd("something wrong"); //var_dump + exit
         
-        return response()->json(['message' => 'Request completed']);
+        return response()->json(['message' => 'The mail was send correctly']);
     }
 }
