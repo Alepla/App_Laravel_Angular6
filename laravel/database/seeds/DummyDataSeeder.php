@@ -19,6 +19,13 @@ class DummyDataSeeder extends Seeder
     protected $totalTags = 10;
 
     /**
+     * Total number of videos.
+     *
+     * @var int
+     */
+    protected $totalVideos = 10;
+
+    /**
      * Percentage of users with articles.
      *
      * @var float Value should be between 0 - 1.0
@@ -69,11 +76,13 @@ class DummyDataSeeder extends Seeder
      */
     public function run(\Faker\Generator $faker)
     {
-        $users = factory(\App\User::class)->times($this->totalUsers)->create();
+        //$users = factory(\App\User::class)->times($this->totalUsers)->create();
 
-        $tags = factory(\App\Tag::class)->times($this->totalTags)->create();
+        $videos = factory(\App\Videos::class)->times($this->totalVideos)->create();
 
-        $users->random((int) $this->totalUsers * $this->userWithArticleRatio)
+        //$tags = factory(\App\Tag::class)->times($this->totalTags)->create();
+
+        /*$users->random((int) $this->totalUsers * $this->userWithArticleRatio)
             ->each(function ($user) use ($faker, $tags) {
                 $user->articles()
                     ->saveMany(
@@ -113,6 +122,6 @@ class DummyDataSeeder extends Seeder
                     ->each(function ($userToFollow) use ($user) {
                         $user->follow($userToFollow);
                     });
-            });
+            });*/
     }
 }

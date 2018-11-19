@@ -16,6 +16,7 @@ export class ContactService {
         return this.apiService.post('/sendemail/', {contactMail: contactMail})
         .pipe(map(
             data => {
+                console.log(data);
                 return data;
             }
         ));

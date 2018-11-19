@@ -51,7 +51,7 @@ import { Errors, Contact, ContactService } from '../core';
         this.contactService.send(this.contact).subscribe(
             data => {
                 this.toastr.successToastr('The mail was send correctly.', 'Success!');
-                //console.log(data);
+                console.log(data);
                 this.isSubmitting = false;
                 this.router.navigateByUrl('/');
             },
