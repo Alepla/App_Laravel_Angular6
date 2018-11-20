@@ -8,6 +8,14 @@ class VideoTransformer extends Transformer
 
     public function transform($data)
     {
-        return $data;
+        return [
+            'id'                => $data['id'],
+            'slug'              => $data['slug'],
+            'title'             => $data['title'],
+            'description'       => $data['description'],
+            'link'              => $data['link'],
+            'createdAt'         => $data['created_at']->toAtomString(),
+            'updatedAt'         => $data['updated_at']->toAtomString()
+        ];
     }
 }

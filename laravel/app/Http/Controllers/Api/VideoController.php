@@ -19,8 +19,6 @@ class VideoController extends ApiController {
 
     public function show(Videos $video)
     {
-        //print_r($user);
-        //print_r($this->respondWithTransformer($user));
         return $this->respondWithTransformer($video);
     }
 }
