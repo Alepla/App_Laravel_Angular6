@@ -1,0 +1,7 @@
+<h4>Videos Sugeridos</h4><br />
+<section style="display:flex; flex-wrap: wrap; justify-content: center;">
+    <app-video-preview 
+        *ngFor="let video of results" 
+        [video]="video">
+    </app-video-preview>
+</section>

@@ -1,0 +1,8 @@
+<div style="width:300px; margin: 10px;">
+    <video width="100%" controls>
+        <source src="{{video.link}}" type="video/mp4">
+    </video>
+    <label [routerLink]="['/video', video.slug]">{{video.title}}</label><br />
+    <label>Visites</label><br />
+    <label>Temps</label>
+</div>
