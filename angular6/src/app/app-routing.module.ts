@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'contact',
     loadChildren: './contact/contact.module#ContactModule'
+  },
+  {
+    path: 'upload',
+    loadChildren: './upload/upload.module#UploadModule'
   }
 ];
 
