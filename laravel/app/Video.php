@@ -34,6 +34,12 @@ class Video extends Model
         return $this->labels->pluck('name')->toArray();
     }
 
+    public function scopeLoadRelations($query)
+    {
+        //print_r($query->pluck('title'));
+    }
+
+
     public function labels()
     {
         return $this->belongsToMany(Label::class);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Video;
+use App\RealWorld\Paginate\Paginate;
+use App\RealWorld\Filters\VideoFilter;
 use App\RealWorld\Transformers\VideoTransformer;
 
 class VideoController extends ApiController { 	
@@ -11,10 +13,11 @@ class VideoController extends ApiController {
         $this->transformer = $transformer;
     }
 
-    public function index()
+    //https://laravel2-1-yomogan.c9users.io/conduit_laravel/public/api/articles?tag=corporis&limit=5&offset=2
+    public function index(VideoFilter $filter)
     {
-        $videos = Video::all();
-        return $this->respondWithTransformer($videos);
+        $videos = new Paginate(Video::loadRelations()->filter($filter));
+        return $this->respondWithPagination($videos);
     }
 
     public function show(Video $video)
@@ -24,7 +27,7 @@ class VideoController extends ApiController {
 
     public function indexOne()
     {   
-        $video =  Video::where('id', 1)->first();;
+        $video =  Video::where('id', 1)->first();
         return $this->respondWithTransformer($video);
     }
 }
