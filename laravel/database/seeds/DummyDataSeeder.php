@@ -78,7 +78,7 @@ class DummyDataSeeder extends Seeder
     {
         //$users = factory(\App\User::class)->times($this->totalUsers)->create();
 
-        $videos = factory(\App\Videos::class)->times($this->totalVideos)->create();
+        $videos = factory(\App\Video::class)->times($this->totalVideos)->create();
 
         //$tags = factory(\App\Tag::class)->times($this->totalTags)->create();
 

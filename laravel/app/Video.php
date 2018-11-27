@@ -5,7 +5,7 @@ namespace App;
 use App\RealWorld\Slug\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 
-class Videos extends Model
+class Video extends Model
 {
     use HasSlug;
     /**

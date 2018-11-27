@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Videos;
+use App\Video;
 use App\RealWorld\Transformers\VideoTransformer;
 
 class VideoController extends ApiController { 	
@@ -13,12 +13,18 @@ class VideoController extends ApiController {
 
     public function index()
     {
-        $videos = Videos::all();
+        $videos = Video::all();
         return $this->respondWithTransformer($videos);
     }
 
-    public function show(Videos $video)
+    public function show(Video $video)
     {
+        return $this->respondWithTransformer($video);
+    }
+
+    public function indexOne()
+    {   
+        $video =  Video::where('id', 1)->first();;
         return $this->respondWithTransformer($video);
     }
 }

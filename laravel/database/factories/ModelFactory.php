@@ -55,7 +55,7 @@ $factory->define(App\Tag::class, function (\Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Videos::class, function (\Faker\Generator $faker) {
+$factory->define(App\Video::class, function (\Faker\Generator $faker) {
 
     static $reduce = 999;
 

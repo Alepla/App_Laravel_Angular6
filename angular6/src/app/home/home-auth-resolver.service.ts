@@ -15,9 +15,9 @@ export class HomeAuthResolver implements Resolve<boolean> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
+  ): Observable<any> {
 
     return this.userService.isAuthenticated.pipe(take(1));
-
+    
   }
 }
