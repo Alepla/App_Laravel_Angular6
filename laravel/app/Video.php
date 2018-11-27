@@ -3,11 +3,12 @@
 namespace App;
 
 use App\RealWorld\Slug\HasSlug;
+use App\RealWorld\Filters\Filterable;
 use Illuminate\Database\Eloquent\Model;
 
-class Videos extends Model
+class Video extends Model
 {
-    use HasSlug;
+    use HasSlug, Filterable;
     /**
      * The attributes that are mass assignable.
      *
@@ -18,6 +19,25 @@ class Videos extends Model
         'description',
         'link'
     ];
+
+    protected $with = [
+        'labels'
+    ];
+
+    /**
+     * Get the list of tags attached to the article.
+     *
+     * @return array
+     */
+    public function getLabelListAttribute()
+    {
+        return $this->label->pluck('name')->toArray();
+    }
+
+    public function labels()
+    {
+        return $this->belongsToMany(Label::class);
+    }
 
     /**
      * Get the key name for route model binding.

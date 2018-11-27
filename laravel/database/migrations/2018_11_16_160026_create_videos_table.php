@@ -22,6 +22,7 @@ class CreateVideosTable extends Migration
             $table->timestamps();
 
             $table->unique(['id', 'slug', 'link']);
+            
         });
     }
 

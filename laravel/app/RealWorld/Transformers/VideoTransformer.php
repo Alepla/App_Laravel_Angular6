@@ -14,6 +14,7 @@ class VideoTransformer extends Transformer
             'title'             => $data['title'],
             'description'       => $data['description'],
             'link'              => $data['link'],
+            'labelList'           => $data['labelList'],
             'createdAt'         => $data['created_at']->toAtomString(),
             'updatedAt'         => $data['updated_at']->toAtomString()
         ];

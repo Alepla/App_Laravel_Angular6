@@ -45,4 +45,6 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::resource('videos','VideoController');
 
+    Route::get('labels','LabelController@index');
+
 });

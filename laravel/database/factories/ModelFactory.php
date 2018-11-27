@@ -55,7 +55,7 @@ $factory->define(App\Tag::class, function (\Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Videos::class, function (\Faker\Generator $faker) {
+$factory->define(App\Video::class, function (\Faker\Generator $faker) {
 
     static $reduce = 999;
 
@@ -65,5 +65,12 @@ $factory->define(App\Videos::class, function (\Faker\Generator $faker) {
         'description' => $faker->sentence,
         'link' => $faker->sentence,
         'created_at' => \Carbon\Carbon::now()->subSeconds($reduce--),
+    ];
+});
+
+$factory->define(App\Label::class, function (\Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->unique()->word,
     ];
 });

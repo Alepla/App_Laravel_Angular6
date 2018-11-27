@@ -26,6 +26,13 @@ class DummyDataSeeder extends Seeder
     protected $totalVideos = 10;
 
     /**
+     * Total number of labels.
+     *
+     * @var int
+     */
+    protected $totalLabels = 10;
+
+    /**
      * Percentage of users with articles.
      *
      * @var float Value should be between 0 - 1.0
@@ -45,6 +52,13 @@ class DummyDataSeeder extends Seeder
      * @var int
      */
     protected $maxArticleTags = 3;
+
+    /**
+     * Maximum tags that can be attached to an video.
+     *
+     * @var int
+     */
+    protected $maxVideoLabels = 3;
 
     /**
      * Maximum number of comments that can be added to an article.
@@ -76,13 +90,20 @@ class DummyDataSeeder extends Seeder
      */
     public function run(\Faker\Generator $faker)
     {
-        //$users = factory(\App\User::class)->times($this->totalUsers)->create();
+        $videos = factory(\App\Video::class)->times($this->totalVideos)->create();
+        $labels = factory(\App\Label::class)->times($this->totalLabels)->create();
 
-        $videos = factory(\App\Videos::class)->times($this->totalVideos)->create();
+        $videos->random($faker->numberBetween(1, (int) $videos->count() * 0.5))
+        ->each(function ($videos) use ($faker, $labels) {
+            $videos->labels()->attach(
+                $labels->random($faker->numberBetween(1, min($this->maxVideoLabels, $this->totalLabels)))
+            );
+        });
+        
+        $users = factory(\App\User::class)->times($this->totalUsers)->create();
+        $tags = factory(\App\Tag::class)->times($this->totalTags)->create();
 
-        //$tags = factory(\App\Tag::class)->times($this->totalTags)->create();
-
-        /*$users->random((int) $this->totalUsers * $this->userWithArticleRatio)
+        $users->random((int) $this->totalUsers * $this->userWithArticleRatio)
             ->each(function ($user) use ($faker, $tags) {
                 $user->articles()
                     ->saveMany(
@@ -122,6 +143,6 @@ class DummyDataSeeder extends Seeder
                     ->each(function ($userToFollow) use ($user) {
                         $user->follow($userToFollow);
                     });
-            });*/
+            });
     }
 }
