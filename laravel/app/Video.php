@@ -29,10 +29,10 @@ class Video extends Model
      *
      * @return array
      */
-    public function getLabelListAttribute()
+    /*public function getLabelListAttribute()
     {
         return $this->label->pluck('name')->toArray();
-    }
+    }*/
 
     public function labels()
     {

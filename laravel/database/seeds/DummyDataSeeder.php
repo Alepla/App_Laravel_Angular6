@@ -104,6 +104,7 @@ class DummyDataSeeder extends Seeder
         $tags = factory(\App\Tag::class)->times($this->totalTags)->create();
 
         $users->random((int) $this->totalUsers * $this->userWithArticleRatio)
+
             ->each(function ($user) use ($faker, $tags) {
                 $user->articles()
                     ->saveMany(

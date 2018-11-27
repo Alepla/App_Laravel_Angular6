@@ -44,6 +44,7 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('sendemail','EmailController@email');
 
     Route::resource('videos','VideoController');
+    Route::get('video', 'VideoController@indexOne');
 
     Route::get('labels','LabelController@index');
 

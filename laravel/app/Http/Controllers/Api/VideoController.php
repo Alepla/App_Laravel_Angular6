@@ -17,8 +17,14 @@ class VideoController extends ApiController {
         return $this->respondWithTransformer($videos);
     }
 
-    public function show(Videos $video)
+    public function show(Video $video)
     {
+        return $this->respondWithTransformer($video);
+    }
+
+    public function indexOne()
+    {   
+        $video =  Video::where('id', 1)->first();;
         return $this->respondWithTransformer($video);
     }
 }

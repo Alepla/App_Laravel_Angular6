@@ -1,12 +1,9 @@
 <div class="home-page">
-
-	<div style="background-color: #338fe7;" class="banner" *appShowAuthed="false">
-		<div class="container">
-			<h1 class="logo-font">holup</h1>
-			<p>Feel free and share your ideas.</p>
-		</div>
-	</div>
-
+	<div *ngIf="video">
+		<video width="400" controls>
+			 <source src={{video.link}} type="video/mp4">Your browser does not support HTML5 video.
+		</video>
+	 </div>
 	<app-video-list [limit]="10" [config]="listConfig"></app-video-list>
 	<!--<div class="container page">
 		<div class="row">

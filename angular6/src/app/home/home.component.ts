@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ArticleListConfig, TagsService, UserService } from '../core';
+import { VideoListConfig, TagsService, UserService, VideosService, Video } from '../core';
 
 @Component({
   selector: 'app-home-page',
@@ -9,19 +9,22 @@ import { ArticleListConfig, TagsService, UserService } from '../core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
   constructor(
     private router: Router,
     private tagsService: TagsService,
-    private userService: UserService
+    private userService: UserService,
+    private videoService: VideosService
   ) {}
 
   isAuthenticated: boolean;
-  listConfig: ArticleListConfig = {
+  listConfig: VideoListConfig = {
     type: 'all',
     filters: {}
   };
   tags: Array<string> = [];
   tagsLoaded = false;
+  video: Video;
 
   ngOnInit() {
     this.userService.isAuthenticated.subscribe(
@@ -41,6 +44,12 @@ export class HomeComponent implements OnInit {
     .subscribe(tags => {
       this.tags = tags;
       this.tagsLoaded = true;
+    });
+
+    this.videoService.getBest()
+    .subscribe(video => {
+      this.video = video;
+      console.log(this.video);
     });
   }
 

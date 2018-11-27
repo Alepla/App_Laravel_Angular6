@@ -34,5 +34,10 @@ export class VideosService {
     get(slug): Observable<Video> {
         return this.apiService.get('/videos/' + slug)
           .pipe(map(data => data.video));
-      }
+    }
+
+    getBest(): Observable<Video> {
+        return this.apiService.get('/video/')
+          .pipe(map(data => data.video));
+    }
 }
