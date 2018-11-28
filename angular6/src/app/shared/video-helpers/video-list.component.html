@@ -1,7 +1,17 @@
-<h4>Videos Sugeridos</h4><br />
 <section style="display:flex; flex-wrap: wrap; justify-content: center;">
     <app-video-preview 
         *ngFor="let video of results" 
         [video]="video">
     </app-video-preview>
 </section>
+
+<!--<nav [hidden]="loading || totalPages.length <= 1">
+    <ul class="pagination">
+        <li class="page-item"
+        [ngClass]="{'active': pageNumber === currentPage}"
+        *ngFor="let pageNumber of totalPages"
+        (click)="setPageTo(pageNumber)">
+            <a class="page-link" >{{ pageNumber }}</a>
+        </li>
+    </ul>
+</nav>-->

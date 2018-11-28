@@ -16,7 +16,8 @@ import {
   TagsService,
   UserService,
   ContactService,
-  VideosService
+  VideosService,
+  LabelsService
 } from './services';
 
 @NgModule({
@@ -36,7 +37,8 @@ import {
     TagsService,
     UserService,
     ContactService,
-    VideosService
+    VideosService,
+    LabelsService
   ],
   declarations: []
 })

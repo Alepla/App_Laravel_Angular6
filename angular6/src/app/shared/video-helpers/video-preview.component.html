@@ -1,8 +1,9 @@
-<div style="width:300px; margin: 10px;">
-    <video width="100%" controls>
+<div [routerLink]="['/video', video.slug]" style="width:210px; margin: 2px; cursor: pointer;">
+    <video width="100%">
         <source src="{{video.link}}" type="video/mp4">
     </video>
-    <label [routerLink]="['/video', video.slug]">{{video.title}}</label><br />
-    <label>Visites</label><br />
-    <label>Temps</label>
+    <p style="font-size: 14px; font-weight: bold; line-height: 12px; vertical-align: top; margin-bottom: 3px; ">{{video.title}}</p>
+    <p style="color: gray; font-size: 14px; margin-bottom: 0px;">Megaglowen</p>
+    <p style="color: gray; font-size: 14px; margin-bottom: 0px;">110 visualizaciones</p>
+    <p style="color: gray; font-size: 14px; margin-bottom: 0px;">1 día</p>
 </div>

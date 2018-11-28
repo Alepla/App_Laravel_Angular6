@@ -1,7 +1,26 @@
 .nav-link {
-  cursor:pointer;
+  	cursor:pointer;
 }
 
 .tag-pill{
-  cursor:pointer;
+  	cursor:pointer;
+}
+.home__title {
+	margin-top: 30px;
+}
+.home__suggested {
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+}
+.label__box {
+	border-radius: 5px;
+	background: #338fe7;
+	color: white;
+	font-size: 15px;
+	margin: 10px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+	cursor: pointer;
 }

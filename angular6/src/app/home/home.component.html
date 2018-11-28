@@ -4,7 +4,20 @@
 			 <source src={{video.link}} type="video/mp4">Your browser does not support HTML5 video.
 		</video>
 	 </div>
-	<app-video-list [limit]="10" [config]="listConfig"></app-video-list>
+	<article style="display:grid; grid-template-columns: 1fr 4fr;">
+		<label></label>
+		<h5 class="home__title">Recommended</h5>
+	</article>
+	<article class="home__suggested">
+		<section>
+			<section *ngIf="labelsLoaded">
+				<label (click)="setListTo('all',{label:label})" class="label__box" *ngFor="let label of labels">
+					{{label}}
+				</label>
+			</section>
+		</section>
+		<app-video-list [limit]="4" [config]="listConfig"></app-video-list>
+	</article>
 	<!--<div class="container page">
 		<div class="row">
 

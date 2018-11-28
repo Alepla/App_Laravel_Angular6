@@ -3,7 +3,6 @@ export interface Video {
     slug: string;
     title: string;
     description: string;
-    body: string;
     link: string;
     createdAt: string;
     updatedAt: string;
