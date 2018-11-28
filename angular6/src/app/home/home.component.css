@@ -17,10 +17,13 @@
 	background: #338fe7;
 	color: white;
 	font-size: 15px;
-	margin: 10px;
+	margin: 1.5px;
 	padding-top: 3px;
 	padding-bottom: 3px;
 	padding-left: 8px;
 	padding-right: 8px;
 	cursor: pointer;
+}
+.box__blpr {
+	background-color: #3f44b1;
 }

@@ -11,12 +11,13 @@
 	<article class="home__suggested">
 		<section>
 			<section *ngIf="labelsLoaded">
+				<label (click)="setListTo('all',{})" class="label__box box__blpr">All</label>
 				<label (click)="setListTo('all',{label:label})" class="label__box" *ngFor="let label of labels">
 					{{label}}
 				</label>
 			</section>
 		</section>
-		<app-video-list [limit]="4" [config]="listConfig"></app-video-list>
+		<app-video-list [limit]="limit" [config]="listConfig"></app-video-list>
 	</article>
 	<!--<div class="container page">
 		<div class="row">
