@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
   isAuthenticated: boolean;
   listConfig: VideoListConfig = {
     type: 'all',
-    filters: {}
+    filters: {},
+    paginate: true
   };
   labels: Array<string> = [];
   labelsLoaded = false;
@@ -66,7 +67,7 @@ export class HomeComponent implements OnInit {
     }
 
     // Otherwise, set the list object
-    this.listConfig = {type: type, filters: filters};
+    this.listConfig = {type: type, filters: filters, paginate:true};
   }
 
   changeLimit(size){

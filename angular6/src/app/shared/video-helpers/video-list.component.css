@@ -1,0 +1,22 @@
+.container__list {
+    display: flex; 
+    flex-wrap: wrap;
+}
+.container__videos {
+    display:flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    width: 90%;
+}
+.arrow__prev {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 4%;
+}
+.arrow__next {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 4%;
+}

@@ -17,6 +17,7 @@ export class UploadComponent {
                     "videogames","Comedy","Entertainment","Notices","Clothing","Education",
                     "Education","Science","ONG"];
     tags = [];
+    uploadedImage = null;
 
     constructor(
         private fb: FormBuilder
@@ -37,6 +38,11 @@ export class UploadComponent {
         }
         this.tagControl.reset('');
     }
+
+    saveImage(e){
+        this.uploadedImage = e.target.files[0];
+    }
+
     removeTag(tagName: string) {
         this.tags = this.tags.filter(tag => tag !== tagName);
     }

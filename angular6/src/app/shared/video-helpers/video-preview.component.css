@@ -1,0 +1,17 @@
+.contenedor__preview {
+    width:210px; 
+    margin: 2px;
+    cursor: pointer;
+}
+.preview__label {
+    color: gray; 
+    font-size: 14px; 
+    margin-bottom: 0px;
+}
+.preview__title {
+    color: #000;
+    font-weight: bold; 
+    line-height: 12px; 
+    vertical-align: top; 
+    margin-bottom: 3px; 
+}

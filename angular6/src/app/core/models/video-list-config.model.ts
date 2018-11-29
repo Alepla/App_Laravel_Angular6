@@ -6,4 +6,6 @@ export interface VideoListConfig {
 		limit?: number,
 		offset?: number
 	};
+
+	paginate: boolean;
 }

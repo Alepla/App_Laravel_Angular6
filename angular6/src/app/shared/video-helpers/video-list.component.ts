@@ -4,7 +4,8 @@ import { Video, VideoListConfig, VideosService } from '../../core';
 
 @Component({
     selector:"app-video-list",
-    templateUrl: './video-list.component.html'
+    templateUrl: './video-list.component.html',
+    styleUrls: ['./video-list.component.css']
 })
 
 export class VideoListComponent {
@@ -33,7 +34,7 @@ export class VideoListComponent {
     }
 
     runQuery() {
-        this.loading = true;
+        this.loading = this.query.paginate;
         this.results = [];
 
         // Create limit and offset filter (if necessary)
@@ -44,7 +45,6 @@ export class VideoListComponent {
 
         this.VideosService.query(this.query)
         .subscribe(data => {
-            this.loading = false;
             this.results = data.videos;
             // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
             this.totalPages = Array.from(new Array(Math.ceil(data.videosCount / this.limit)), (val, index) => index + 1);

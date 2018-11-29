@@ -1,9 +1,10 @@
-<div [routerLink]="['/video', video.slug]" style="width:210px; margin: 2px; cursor: pointer;">
-    <video width="100%">
-        <source src="{{video.link}}" type="video/mp4">
+<div class="contenedor__preview" [routerLink]="['/video', video.slug]">
+    <video width="100%" [src]="video.link">
     </video>
-    <p style="font-size: 14px; font-weight: bold; line-height: 12px; vertical-align: top; margin-bottom: 3px; ">{{video.title}}</p>
-    <p style="color: gray; font-size: 14px; margin-bottom: 0px;">Megaglowen</p>
-    <p style="color: gray; font-size: 14px; margin-bottom: 0px;">110 visualizaciones</p>
-    <p style="color: gray; font-size: 14px; margin-bottom: 0px;">1 día</p>
+    <section>
+        <p class="preview__label preview__title">{{video.title}}</p>
+        <p class="preview__label preview__channel">Megaglowen</p>
+        <p class="preview__label preview__views">110 visualizaciones</p>
+        <p class="preview__label preview__time">1 día</p>
+    </section>
 </div>

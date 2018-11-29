@@ -1,19 +1,21 @@
-<article style="display: flex; flex-wrap: wrap;">
-    <section style="display: flex; align-items: center; justify-content: center; width: 4%;">
-        <label [hidden]="loading || totalPages.length <= 1 || currentPage < 2"
-            (click)="setPageTo(currentPage - 1)" style="font-size:50px;">
+<article class="container__list">
+    <section class="arrow__prev" 
+    [hidden]="!loading || totalPages.length <= 1 || currentPage < 2"
+    (click)="setPageTo(currentPage - 1)">
+        <label style="font-size:50px;">
             <<!--<i class="fal fa-chevron-circle-left"></i>-->
         </label>
     </section>
-    <section style="display:flex; flex-wrap: wrap; justify-content: center; width: 90%;">
+    <section class="container__videos">
         <app-video-preview 
             *ngFor="let video of results" 
             [video]="video">
         </app-video-preview>
     </section>
-    <section style="display: flex; align-items: center; justify-content: center; width: 4%;">
-        <label [hidden]="loading || totalPages.length <= 1 || currentPage >= totalPages.length"
-            (click)="setPageTo(currentPage + 1)" style="font-size:50px;">
+    <section class="arrow__next"
+    [hidden]="!loading || totalPages.length <= 1 || currentPage >= totalPages.length"
+    (click)="setPageTo(currentPage + 1)" style="font-size:50px;">
+        <label >
                 >
         </label>
     </section>

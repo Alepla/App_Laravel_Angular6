@@ -1,0 +1,25 @@
+.details__content {
+    margin-top:25px;
+    display:grid; 
+    grid-template-columns: 2fr 1fr;
+}
+.list__videos {
+    display: flex; 
+    flex-direction: column;
+}
+.label__video {
+    margin-left: 3%; 
+    margin-right: 3%;
+}
+.title__video {
+    font-size: 25px;
+    font-weight: bold;
+}
+.desc__video{
+    font-size: 17px;
+}
+/*.contenedor__preview {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: auto;
+}*/

@@ -1,5 +1,12 @@
-<h1>{{video.title}}</h1>
-<video controls>
-    <source src="{{video.link}}" type="video/mp4">
-</video><br />
-<label>{{video.description}}</label>
+
+<article class="details__content">
+        <section>
+                <video style="width: 94%; margin-left: 3%; margin-right: 3%;" [src]="video.link" controls>
+                        Your browser does not support HTML5 video.
+                </video>
+                <label class="label__video title__video">{{video.title}}</label><br />
+                <label class="label__video">imageuser - nameuser</label><br />
+                <label class="label__video desc__video">{{video.description}}</label>
+        </section>
+        <app-video-list class="list__videos"[limit]="6" [config]="listConfig"></app-video-list>
+</article>

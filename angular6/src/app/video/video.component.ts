@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Video, VideosService } from '../core';
+import { Video, VideosService, VideoListConfig } from '../core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-article-page',
-    templateUrl: './video.component.html'
+    templateUrl: './video.component.html',
+    styleUrls: ['./video.component.css']
 })
 
 export class VideoComponent implements OnInit {
 
     video: Video;
+    listConfig: VideoListConfig = {
+        type: 'all',
+        filters: {},
+        paginate: false
+    };
 
     constructor(
         private route: ActivatedRoute
@@ -22,5 +28,11 @@ export class VideoComponent implements OnInit {
                 this.video = data.video;
             }
         );
+        //this.setListTo('all',{})
+    }
+
+    setListTo(type: string = '', filters: Object = {}) {
+        // Otherwise, set the list object
+        this.listConfig = {type: type, filters: filters, paginate: false};
     }
 }
