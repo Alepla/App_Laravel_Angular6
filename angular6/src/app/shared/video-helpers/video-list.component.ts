@@ -21,9 +21,16 @@ export class VideoListComponent {
             this.runQuery();
         }
     }
+    @Input() set exclude(exclude: string){
+        if(exclude){
+            this.excludes = exclude;
+            this.runQuery();
+        }
+    };
 
     query: VideoListConfig;
     results: Video[];
+    excludes = "";
     loading = false;
     currentPage = 1;
     totalPages: Array<number> = [1];
@@ -45,7 +52,10 @@ export class VideoListComponent {
 
         this.VideosService.query(this.query)
         .subscribe(data => {
-            this.results = data.videos;
+            if(this.excludes)
+                this.results = data.videos.filter(elem => elem.id != this.excludes);
+            else
+                this.results = data.videos;
             // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
             this.totalPages = Array.from(new Array(Math.ceil(data.videosCount / this.limit)), (val, index) => index + 1);
         });
