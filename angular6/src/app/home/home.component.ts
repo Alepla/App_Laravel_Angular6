@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit {
 
     this.videoService.getBest()
     .subscribe(video => {
+      console.log(video)
       this.video = video;
     });
   }

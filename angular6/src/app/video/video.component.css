@@ -1,7 +1,7 @@
 .details__content {
     margin-top:25px;
     display:grid; 
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 1fr;
 }
 .list__videos {
     display: flex; 
@@ -18,8 +18,15 @@
 .desc__video{
     font-size: 17px;
 }
-/*.contenedor__preview {
+:host >>> .contenedor__preview {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    width: auto;
-}*/
+    grid-template-columns: 1fr 1.25fr;
+    grid-gap: 10px;
+    width: 410px !important;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #80808075;
+    margin-bottom: 12px !important;
+}
+:host >>> .container__videos {
+    width: 100% !important;
+}
