@@ -1,9 +1,11 @@
 <nav class="navbar navbar-light">
-  <div class="container">
+  <div class="container" style="display:grid; grid-template-columns:1fr 2fr 3fr;">
     <div class="navbar-brand" routerLink="/" style=" display:flex; align-items:center; color:#3e9be4 !important;">
       <img src="http://daniortizgar.tk/holup.svg" style="width:21px;" />
       <label style="margin:0px;">holup</label>
     </div>
+
+    <app-search style="display:flex; align-items:center;"></app-search>
 
     <!-- Show this for logged out users -->
     <ul *appShowAuthed="false"

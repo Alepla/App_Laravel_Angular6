@@ -9,6 +9,7 @@ import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
 import {VideoListComponent,VideoPreviewComponent} from './video-helpers';
+import {SearchComponent} from './search';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {VideoListComponent,VideoPreviewComponent} from './video-helpers';
     ListErrorsComponent,
     ShowAuthedDirective,
     VideoListComponent,
-    VideoPreviewComponent
+    VideoPreviewComponent,
+    SearchComponent
   ],
   exports: [
     ArticleListComponent,
@@ -44,7 +46,8 @@ import {VideoListComponent,VideoPreviewComponent} from './video-helpers';
     RouterModule,
     ShowAuthedDirective,
     VideoListComponent,
-    VideoPreviewComponent
+    VideoPreviewComponent,
+    SearchComponent
   ]
 })
 export class SharedModule {}

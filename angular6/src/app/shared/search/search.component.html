@@ -1,0 +1,8 @@
+<form [formGroup]="searchForm" style="display:grid; grid-template-columns:2fr 1fr;">
+    <fieldset>
+            <input type="text" placeholder="Search" formControlName="name" />
+    </fieldset>
+    <fieldset>
+        <button (click)="searchName()">Search</button>
+    </fieldset>
+</form>
