@@ -56,6 +56,8 @@ class AuthController extends ApiController
             'username' => $request->input('user.username'),
             'email' => $request->input('user.email'),
             'password' => $request->input('user.password'),
+            'followers' => 0,
+            'image' => 'https://api.adorable.io/avatars/150/'.$request->input('user.email').'.png'
         ]);
         
         //return response()->json($request->get('user'), 200, []);

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
 import { VideoModule } from './video/video.module';
+import { LoginModule } from './login/login.module';
 import {
   FooterComponent,
   HeaderComponent,
@@ -22,6 +23,7 @@ import { CoreModule } from './core/core.module';
     HomeModule,
     AuthModule,
     AppRoutingModule,
+    LoginModule,
     VideoModule
   ],
   providers: [],

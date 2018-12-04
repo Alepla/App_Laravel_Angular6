@@ -45,6 +45,11 @@ class Video extends Model
         return $this->belongsToMany(Label::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     /**
      * Get the key name for route model binding.
      *

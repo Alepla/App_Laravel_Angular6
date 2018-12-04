@@ -46,6 +46,8 @@ class DummyDataSeeder extends Seeder
      */
     protected $maxArticlesByUser = 15;
 
+    protected $maxVideosByUser = 15;
+
     /**
      * Maximum tags that can be attached to an article.
      *
@@ -90,15 +92,10 @@ class DummyDataSeeder extends Seeder
      */
     public function run(\Faker\Generator $faker)
     {
-        $videos = factory(\App\Video::class)->times($this->totalVideos)->create();
+        //$videos = factory(\App\Video::class)->times($this->totalVideos)->create();
         $labels = factory(\App\Label::class)->times($this->totalLabels)->create();
 
-        $videos->random($faker->numberBetween(1, (int) $videos->count() * 0.5))
-        ->each(function ($videos) use ($faker, $labels) {
-            $videos->labels()->attach(
-                $labels->random($faker->numberBetween(1, min($this->maxVideoLabels, $this->totalLabels)))
-            );
-        });
+
         
         $users = factory(\App\User::class)->times($this->totalUsers)->create();
         $tags = factory(\App\Tag::class)->times($this->totalTags)->create();
@@ -125,7 +122,29 @@ class DummyDataSeeder extends Seeder
                                 ->make()
                             );
                     });
+            })
+            ->each(function ($user) use ($faker, $labels) {
+                $user->videos()
+                    ->saveMany(
+                        factory(\App\Video::class)
+                        ->times($faker->numberBetween(1, $this->maxVideosByUser))
+                        ->make()
+                    )
+                    ->each(function ($videos) use ($faker, $labels) {
+                        $videos->labels()->attach(
+                            $labels->random($faker->numberBetween(1, min($this->maxVideoLabels, $this->totalLabels)))
+                        );
+                    });
             });
+
+        /*$videos = \App\Video::all();
+
+        $videos->random($faker->numberBetween(1, (int) $videos->count() * 0.5))
+        ->each(function ($videos) use ($faker, $labels) {
+            $videos->labels()->attach(
+                $labels->random($faker->numberBetween(1, min($this->maxVideoLabels, $this->totalLabels)))
+            );
+        });*/
 
         $articles = \App\Article::all();
 

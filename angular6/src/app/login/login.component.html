@@ -1,0 +1,53 @@
+<div class="auth-page">
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-6 offset-md-3 col-xs-12">
+          <h1 class="text-xs-center">{{ title }}</h1>
+          <p class="text-xs-center">
+            <a style="color:#3e9be4;" [routerLink]="['/login']" *ngIf="loginType === 'register'">Have an account?</a>
+            <a style="color:#3e9be4;" [routerLink]="['/register']" *ngIf="loginType === 'login'">Need an account?</a>
+          </p>
+            <form [formGroup]='loginForm'>
+                <fieldset class="form-group"
+                *ngIf="loginType === 'register'">
+                    <input
+                        type="text"
+                        formControlName="username"
+                        placeholder="Username"
+                        class="form-control form-control-lg"
+                        />
+                    <section *ngIf="isSubmitting && f.username.errors" class="text-danger">
+                        <label *ngIf="f.username.errors.required">Username is required</label>
+                        <label *ngIf="f.username.errors.minlength">Username minium length is 3</label>
+                        <label *ngIf="f.username.errors.maxlength">Username minium length is 25</label>
+                    </section>
+                </fieldset>
+                <fieldset class="form-group">
+                    <input 
+                        type="email" 
+                        formControlName="email" 
+                        placeholder="Email"
+                        class="form-control form-control-lg"
+                        />
+                    <section *ngIf="isSubmitting && f.email.errors" class="text-danger">
+                        <label *ngIf="f.email.errors.required">Email is required</label>
+                        <label *ngIf="f.email.errors?.pattern">Email is invalid</label>
+                    </section>
+                </fieldset>
+                <fieldset class="form-group">
+                    <input 
+                        type="password"
+                        formControlName="password"
+                        placeholder="Password"
+                        class="form-control form-control-lg"
+                        />
+                    <section *ngIf="isSubmitting && f.password.errors" class="text-danger">
+                        <label *ngIf="f.password.errors.required">Password is required</label>
+                    </section>
+                </fieldset>
+                <button class="btn btn-lg btn-primary pull-xs-right" style="background-color:#3e9be4; border-color: #074fd2;" (click)="submitForm()">{{title}}</button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
