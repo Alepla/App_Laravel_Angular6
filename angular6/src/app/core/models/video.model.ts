@@ -6,4 +6,5 @@ export interface Video {
     link: string;
     createdAt: string;
     updatedAt: string;
+    time: string;
 }

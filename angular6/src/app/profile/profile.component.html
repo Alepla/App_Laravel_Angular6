@@ -13,10 +13,15 @@
             [profile]="profile"
             (toggle)="onToggleFollowing($event)">
           </app-follow-button>
-           <a [routerLink]="['/settings']"
+           <!--<a [routerLink]="['/settings']"
               [hidden]="!isUser"
               class="btn btn-sm btn-outline-secondary action-btn">
               <i class="ion-gear-a"></i> Edit Profile Settings
+            </a>-->
+            <a class="btn btn-sm btn-outline-secondary action-btn"
+            style="color: #f73a2c; border: 1px solid #f04337;"
+            (click)="logout()">
+              Logout.
             </a>
         </div>
 

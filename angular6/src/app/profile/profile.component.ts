@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { User, UserService, Profile } from '../core';
 import { concatMap } from 'rxjs/operators/concatMap';
@@ -11,6 +11,7 @@ import { tap } from 'rxjs/operators/tap';
 })
 export class ProfileComponent implements OnInit {
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private userService: UserService
   ) { }
@@ -32,6 +33,10 @@ export class ProfileComponent implements OnInit {
         ));
       })
     ).subscribe();
+  }
+  logout() {
+    this.userService.purgeAuth();
+    this.router.navigateByUrl('/');
   }
 
   onToggleFollowing(following: boolean) {
