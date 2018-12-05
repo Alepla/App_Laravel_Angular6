@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoginService } from '../core';
+import { Errors, LoginService } from '../core';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     title: String = '';
     loginForm: FormGroup;
     isSubmitting = false;
+    errors: Errors = {errors: {}};
 
     constructor(
         private fb: FormBuilder,
@@ -41,7 +42,9 @@ export class LoginComponent implements OnInit {
     get f() { return this.loginForm.controls; }
 
     submitForm(){
+        this.errors = {errors: {}};
         this.isSubmitting = true;
+        
         if(this.loginForm.status === "VALID"){
             this.loginService
             .attemptLogin(this.loginType,this.loginForm.value)
@@ -52,7 +55,8 @@ export class LoginComponent implements OnInit {
                     this.router.navigateByUrl('/');
                 },
                 err => {
-                    console.log("error")
+                    this.errors = err;
+                    this.isSubmitting = false;
                 }
             );
         }

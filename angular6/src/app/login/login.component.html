@@ -2,12 +2,14 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">{{ title }}</h1>
-          <p class="text-xs-center">
-            <a style="color:#3e9be4;" [routerLink]="['/login']" *ngIf="loginType === 'register'">Have an account?</a>
-            <a style="color:#3e9be4;" [routerLink]="['/register']" *ngIf="loginType === 'login'">Need an account?</a>
-          </p>
+            <h1 class="text-xs-center">{{ title }}</h1>
+            <p class="text-xs-center">
+                <a style="color:#3e9be4;" [routerLink]="['/login']" *ngIf="loginType === 'register'">Have an account?</a>
+                <a style="color:#3e9be4;" [routerLink]="['/register']" *ngIf="loginType === 'login'">Need an account?</a>
+            </p>
+            <app-list-errors [errors]="errors"></app-list-errors>
             <form [formGroup]='loginForm'>
+                <fieldset [disabled]="isSubmitting">
                 <fieldset class="form-group"
                 *ngIf="loginType === 'register'">
                     <input
@@ -46,6 +48,7 @@
                     </section>
                 </fieldset>
                 <button class="btn btn-lg btn-primary pull-xs-right" style="background-color:#3e9be4; border-color: #074fd2;" (click)="submitForm()">{{title}}</button>
+                </fieldset>
             </form>
         </div>
       </div>
