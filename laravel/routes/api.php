@@ -48,4 +48,6 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('labels','LabelController@index');
 
+    Route::get('search','SearchController@index');
+
 });

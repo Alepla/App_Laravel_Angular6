@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-search',
@@ -10,13 +11,14 @@ export class SearchComponent {
     searchForm: FormGroup
 
     constructor(
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private router: Router
     ){
         this.searchForm = this.fb.group({
             name: ['',Validators.required]
         })
     }
     searchName(){
-        console.log(this.searchForm.value.name)
+        this.router.navigateByUrl('/search/'+this.searchForm.value.name);
     }
 }

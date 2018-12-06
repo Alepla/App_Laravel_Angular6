@@ -17,15 +17,4 @@ class VideoFilter extends Filter
 
         return $this->builder->whereIn('id', $videoIds);
     }
-    /*protected function title($title){
-        $videos = DB::table('videos')->where('title', 'like', "%" . $title . "%")->get();
-        foreach ($videos as $video)
-        {
-            var_dump($video->title);
-        }
-        //$videos = DB::table('videos')->where('title','Lil Peep - Life Is Beautiful')->first();
-        //echo $videos;
-        //echo $videos->name;
-        //print_r($videos)->pluck('title');
-    }*/
 }

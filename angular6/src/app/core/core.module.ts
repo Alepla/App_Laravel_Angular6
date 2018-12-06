@@ -18,7 +18,8 @@ import {
   ContactService,
   VideosService,
   LabelsService,
-  LoginService
+  LoginService,
+  SearchService
 } from './services';
 
 @NgModule({
@@ -40,7 +41,8 @@ import {
     ContactService,
     VideosService,
     LabelsService,
-    LoginService
+    LoginService,
+    SearchService
   ],
   declarations: []
 })

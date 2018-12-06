@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'upload',
     loadChildren: './upload/upload.module#UploadModule'
+  },
+  {
+    path: 'search',
+    loadChildren: './search/search.module#SearchModule'
   }
 ];
 

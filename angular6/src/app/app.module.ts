@@ -13,6 +13,7 @@ import {
 } from './shared';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
+import { SearchModule } from './search/search.module';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
@@ -24,6 +25,7 @@ import { CoreModule } from './core/core.module';
     AuthModule,
     AppRoutingModule,
     LoginModule,
+    SearchModule,
     VideoModule
   ],
   providers: [],

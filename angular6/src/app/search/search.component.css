@@ -1,0 +1,31 @@
+
+.list__videos {
+    display: flex; 
+    flex-direction: column;
+}
+.label__video {
+    margin-left: 3%; 
+    margin-right: 3%;
+}
+.title__video {
+    font-size: 25px;
+    font-weight: bold;
+}
+.desc__video{
+    font-size: 17px;
+}
+:host >>> .contenedor__preview {
+    display: grid;
+    grid-template-columns: 1fr 1.50fr;
+    grid-gap: 10px;
+    width: 625px !important;
+    margin-bottom: 15px !important;
+}
+:host >>> .container__videos {
+    width: 100% !important;
+}
+:host >>> .preview__title {
+    font-size: 15px !important;
+    font-weight: 100 !important;
+    font-family: sans-serif;
+}
