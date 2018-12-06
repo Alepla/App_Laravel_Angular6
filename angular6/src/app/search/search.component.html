@@ -1,3 +1,5 @@
 <app-video-list 
+    *ngIf="videos.length"
     class="list__videos" 
     [data]="videos" ></app-video-list>
+<label *ngIf="!videos.length">Search not found</label>

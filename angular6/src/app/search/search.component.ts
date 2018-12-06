@@ -24,7 +24,6 @@ export class SearchComponent implements OnInit {
         this.route.data.subscribe(
             (data: { search: Video }) => {
                 this.videos = data.search;
-                console.log(this.videos)
             }
         );
     }
