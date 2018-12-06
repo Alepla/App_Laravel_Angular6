@@ -19,6 +19,7 @@ export class SearchComponent {
         })
     }
     searchName(){
-        this.router.navigateByUrl('/search/'+this.searchForm.value.name);
+        if(this.searchForm.valid)
+            this.router.navigateByUrl('/search/'+this.searchForm.value.name);
     }
 }
