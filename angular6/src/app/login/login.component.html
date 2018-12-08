@@ -1,0 +1,20 @@
+<a [routerLink]="['/logiin']" *ngIf="loginType == 'regiister'">Have an account?</a>
+<a [routerLink]="['/regiister']" *ngIf="loginType == 'logiin'">Need an account?</a>
+<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+    <input 
+        formControlName="username"
+        placeholder="Username"
+        type="text"
+        *ngIf="loginType == 'regiister'"/>
+    <input 
+        formControlName="email"
+        placeholder="Email"
+        type="text"/>
+    <input 
+        formControlName="password"
+        placeholder="Password"
+        type="password"/>
+    <button [disabled]="!loginForm.valid" type="submit">
+        {{title}}
+    </button>
+</form>

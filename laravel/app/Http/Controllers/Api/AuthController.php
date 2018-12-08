@@ -52,10 +52,12 @@ class AuthController extends ApiController
     public function register(RegisterUser $request)
     //public function register(Request $request)
     {
+        
         $user = User::create([
-            'username' => $request->input('user.username'),
             'email' => $request->input('user.email'),
             'password' => $request->input('user.password'),
+            'username' => $request->input('user.username'),
+            'follows' => 0
         ]);
         
         //return response()->json($request->get('user'), 200, []);

@@ -2,6 +2,8 @@ export interface VideoListConfig {
 	type: string;
 
 	filters: {
-		limit?: number
+		label?: string,
+		limit?: number,
+		offset?: number
 	};
 }

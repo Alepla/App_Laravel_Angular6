@@ -19,6 +19,7 @@ $factory->define(App\User::class, function (\Faker\Generator $faker) {
         'password' => 'secret',
         'bio' => $faker->sentence,
         'image' => 'https://cdn.worldvectorlogo.com/logos/laravel.svg',
+        'follows' => $faker->numberBetween(1, 1000),
     ];
 });
 
@@ -65,5 +66,12 @@ $factory->define(App\Video::class, function (\Faker\Generator $faker) {
         'description' => $faker->sentence,
         'link' => $faker->sentence,
         'created_at' => \Carbon\Carbon::now()->subSeconds($reduce--),
+    ];
+});
+
+$factory->define(App\Label::class, function (\Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->unique()->word,
     ];
 });

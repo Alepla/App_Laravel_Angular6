@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Video;
+use App\RealWorld\Paginate\Paginate;
+use App\RealWorld\Filters\VideoFilter;
 use App\RealWorld\Transformers\VideoTransformer;
 
 class VideoController extends ApiController { 	
@@ -11,10 +13,10 @@ class VideoController extends ApiController {
         $this->transformer = $transformer;
     }
 
-    public function index()
+    public function index(VideoFilter $filter)
     {
-        $videos = Video::all();
-        return $this->respondWithTransformer($videos);
+        $videos = new Paginate(Video::loadRelations()->filter($filter));
+        return $this->respondWithPagination($videos);
     }
 
     public function show(Video $video)

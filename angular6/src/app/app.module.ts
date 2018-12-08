@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
+import { LoginModule } from './login/login.module';
 import { HomeModule } from './home/home.module';
 import { VideoModule } from './video/video.module';
 import {
@@ -21,6 +22,7 @@ import { CoreModule } from './core/core.module';
     SharedModule,
     HomeModule,
     AuthModule,
+    LoginModule,
     AppRoutingModule,
     VideoModule
   ],

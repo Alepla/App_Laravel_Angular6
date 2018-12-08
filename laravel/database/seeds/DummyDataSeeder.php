@@ -67,6 +67,12 @@ class DummyDataSeeder extends Seeder
      */
     protected $usersWithFollowingRatio = 0.75;
 
+    protected $maxVideoLabels = 3;
+
+    protected $totalLabels = 10;
+
+    protected $maxVideosByUser = 15;
+
     /**
      * Populate the database with dummy data for testing.
      * Complete dummy data generation including relationships.
@@ -76,9 +82,46 @@ class DummyDataSeeder extends Seeder
      */
     public function run(\Faker\Generator $faker)
     {
-        //$users = factory(\App\User::class)->times($this->totalUsers)->create();
+        $users = factory(\App\User::class)->times($this->totalUsers)->create();
 
-        $videos = factory(\App\Video::class)->times($this->totalVideos)->create();
+        //$videos = factory(\App\Video::class)->times($this->totalVideos)->create();
+
+        $labels = factory(\App\Label::class)->times($this->totalLabels)->create();
+
+        /*$videos->random($faker->numberBetween(1, (int) $videos->count() * 0.5))
+            ->each(function ($videos) use ($faker, $labels) {
+                $videos->label()->attach(
+                    $labels->random($faker->numberBetween(1, min($this->maxVideoLabels, $this->totalLabels)))
+                );
+            });*/
+
+        $users->random((int) $this->totalUsers * $this->userWithArticleRatio)
+            /*->each(function ($user) use ($faker, $tags) {
+                $user->articles()
+                    ->saveMany(
+                        factory(\App\Article::class)
+                        ->times($faker->numberBetween(1, $this->maxArticlesByUser))
+                        ->make()
+                    )
+                    ->each(function ($article) use ($faker, $tags) {
+                        $article->tags()->attach(
+                            $tags->random($faker->numberBetween(1, min($this->maxArticleTags, $this->totalTags)))
+                        );
+                    })*/
+                    ->each(function ($user) use ($faker, $labels) {
+                        $user->videos()
+                            ->saveMany(
+                                factory(\App\Video::class)
+                                ->times($faker->numberBetween(1, $this->maxVideosByUser))
+                                ->make()
+                            )
+                            ->each(function ($videos) use ($faker, $labels) {
+                                $videos->labels()->attach(
+                                    $labels->random($faker->numberBetween(1, min($this->maxVideoLabels, $this->totalLabels)))
+                                );
+                            });
+                    });
+            //});
 
         //$tags = factory(\App\Tag::class)->times($this->totalTags)->create();
 

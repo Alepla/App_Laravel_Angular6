@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { VideoListConfig, TagsService, UserService, VideosService, Video } from '../core';
+import { VideoListConfig, LabelsService, UserService, VideosService, Video } from '../core';
 
 @Component({
   selector: 'app-home-page',
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private tagsService: TagsService,
+    private labelsService: LabelsService,
     private userService: UserService,
     private videoService: VideosService
   ) {}
@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
     type: 'all',
     filters: {}
   };
-  tags: Array<string> = [];
-  tagsLoaded = false;
+  labels: Array<string> = [];
+  labelsLoaded = false;
   video: Video;
 
   ngOnInit() {
@@ -40,16 +40,15 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    this.tagsService.getAll()
-    .subscribe(tags => {
-      this.tags = tags;
-      this.tagsLoaded = true;
+    this.labelsService.getAll()
+    .subscribe(labels => {
+      this.labels = labels;
+      this.labelsLoaded = true;
     });
 
     this.videoService.getBest()
     .subscribe(video => {
       this.video = video;
-      console.log(this.video);
     });
   }
 

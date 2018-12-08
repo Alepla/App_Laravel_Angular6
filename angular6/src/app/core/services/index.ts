@@ -8,3 +8,5 @@ export * from './tags.service';
 export * from './user.service';
 export * from './contact.service';
 export * from './videos.service';
+export * from './labels.service';
+export * from './login.service';

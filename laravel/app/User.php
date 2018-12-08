@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password', 'bio', 'image'
+        'username', 'email', 'password', 'bio', 'image', 'follows'
     ];
 
     /**
@@ -58,6 +58,11 @@ class User extends Authenticatable
     public function articles()
     {
         return $this->hasMany(Article::class)->latest();
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(Video::class)->latest();
     }
 
     /**
