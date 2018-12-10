@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use Auth;
 use App\User;
+use App\SocialLogin;
+use Session;
 use App\Http\Requests\Api\LoginUser;
 use App\Http\Requests\Api\RegisterUser;
 use App\RealWorld\Transformers\UserTransformer;
@@ -15,9 +17,10 @@ class AuthController extends ApiController
      *
      * @param UserTransformer $transformer
      */
-    public function __construct(UserTransformer $transformer)
+    public function __construct(UserTransformer $transformer, SocialLogin $socialLogin)
     {
         $this->transformer = $transformer;
+        $this->socialLogin = $socialLogin;
     }
 
     /**
@@ -35,10 +38,6 @@ class AuthController extends ApiController
         if (! Auth::once($credentials)) {
             return $this->respondFailedLogin();
         }
-        
-        //return response()->json($request->get('user'), 200, []);
-        //return response()->json($request->input('user.email'), 200, []);
-        //return response()->json(auth()->user(), 200, []);
 
         return $this->respondWithTransformer(auth()->user());
     }
@@ -50,7 +49,6 @@ class AuthController extends ApiController
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(RegisterUser $request)
-    //public function register(Request $request)
     {
         $user = User::create([
             'username' => $request->input('user.username'),
@@ -60,10 +58,42 @@ class AuthController extends ApiController
             'image' => 'https://api.adorable.io/avatars/150/'.$request->input('user.email').'.png'
         ]);
         
-        //return response()->json($request->get('user'), 200, []);
-        //return response()->json($request->input('user.username'), 200, []);
-        //return response()->json($user, 200, []);
-        
         return $this->respondWithTransformer($user);
+    }
+
+    public function auth($provider)
+    {
+        return $this->socialLogin->authenticate($provider);
+    }
+
+    public function sociallogin($provider)
+    {
+        try {
+            $user = $this->socialLogin->login($provider);
+            $valUser = User::where('email', '=', $user->email)->first();
+            if($valUser === null){
+                $user = User::create([
+                    'username' => $user->name,
+                    'email' => $user->email,
+                    'password' => $user->id,
+                    'followers' => 0,
+                    'image' => $user->avatar
+                ]);
+            }
+            
+            session(['Email' => $user->email]);
+            return redirect('http://localhost:4200/sociallogin');
+        } catch (SocialAuthException $e) {
+            echo 'Not User';
+        }
+    }
+    public function loginsocial()
+    {
+        session(['Email' => 'daniortizgar@gmail.com']);
+        if (Session::has('Email')) {
+            $user = User::where('email','=',Session::get('Email'))->first();
+            $credentials = Session::get('Email');
+            return $this->respondWithTransformer($user);
+        }
     }
 }

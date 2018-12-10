@@ -37,5 +37,17 @@ export class LoginService {
             }
         ));
     }
+
+    sociallogin(): Observable<User>{
+        console.log("hola");
+        return this.apiService.get('/loginsocial')
+            .pipe(map(
+            data => {
+                console.log(data)
+                this.setAuth(data.user);
+                return data;
+            }
+        ));
+    }
     
 }

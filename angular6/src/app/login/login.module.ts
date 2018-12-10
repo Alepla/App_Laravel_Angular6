@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared';
 
 import { LoginComponent } from './login.component';
+import { LoginResolver } from './login-resolver.service';
 import { LoginRoutingModule } from './login-routing.module';
 import { NoLoginGuard } from './no-login-guard.service';
 
@@ -18,7 +19,8 @@ import { NoLoginGuard } from './no-login-guard.service';
     LoginComponent
   ],
   providers: [
-    NoLoginGuard
+    NoLoginGuard,
+    LoginResolver
   ]
 })
 export class LoginModule {}
