@@ -37,5 +37,16 @@ export class LoginService {
             }
         ));
     }
-    
+
+    attemptSocialLogin(type, data): Observable<User> {
+        console.log(data);
+        const route = (type === 'logiin') ? '/login' : '';
+        return this.apiService.post('/socials' + route, {user: data})
+            .pipe(map(
+            data => {
+                this.setAuth(data.user);
+                return data;
+            }
+        ));
+    }
 }

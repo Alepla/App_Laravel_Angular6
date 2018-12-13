@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { ToastrManager } from 'ng6-toastr-notifications';
 import { Errors, LoginService } from '../core';
+
+import {
+  AuthService,
+  GoogleLoginProvider
+} from 'angular-6-social-login';
 
 @Component({
   selector: 'app-login-page',
@@ -19,13 +24,53 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private loginService: LoginService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private socialAuthService: AuthService,
+    public toastr: ToastrManager
   ) {
     // use FormBuilder to create a form group
     this.loginForm = this.fb.group({
       'email': ['', Validators.required],
       'password': ['', Validators.required]
     });
+  }
+
+  public socialSignIn(socialPlatform : string) {
+    let socialPlatformProvider;
+    if(socialPlatform == "google"){
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    }
+    
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+
+        let username = userData.name.replace(/ /g, "");
+
+        const credentials = {
+          email: userData.email,
+          password: userData.id,
+          username: username,
+          image: userData.image
+        }
+        
+        this.isSubmitting = true;
+        this.errors = {errors: {}};
+
+        this.loginService
+        .attemptSocialLogin(this.loginType, credentials)
+        .subscribe(
+          data => {
+            this.toastr.successToastr('Greate to see you again '+ credentials.username, 'Success!');
+            window.location.replace('/');
+          },
+          err => {
+            this.toastr.errorToastr(err.text, 'Oops!');
+            this.errors = err;
+            this.isSubmitting = false;
+          }
+        );
+      }
+    );
   }
 
   ngOnInit() {
@@ -51,10 +96,11 @@ export class LoginComponent implements OnInit {
     .attemptLogin(this.loginType, credentials)
     .subscribe(
       data => {
-        console.log(data);
-        this.router.navigateByUrl('/');
+        this.toastr.successToastr('Greate to see you again '+ credentials.username, 'Success!');
+        window.location.replace('/');
       },
       err => {
+        this.toastr.errorToastr('Something no good happened here', 'Oops!');
         this.errors = err;
         this.isSubmitting = false;
       }

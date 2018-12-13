@@ -17,4 +17,5 @@
     <button [disabled]="!loginForm.valid" type="submit">
         {{title}}
     </button>
+    <button (click)="socialSignIn('google')" type="button">Sign in with Google</button>              
 </form>

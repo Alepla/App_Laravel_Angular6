@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Http\Requests\Api\LoginUser;
@@ -65,5 +65,26 @@ class AuthController extends ApiController
         //return response()->json($user, 200, []);
         
         return $this->respondWithTransformer($user);
+    }
+
+    public function registerSocial(Request $request)
+    //public function register(Request $request)
+    {
+        $email = User::where('email', '=', $request->input('user.email'))->first();
+        if($email === null) {
+            $user = User::create([
+                'email' => $request->input('user.email'),
+                'password' => $request->input('user.password'),
+                'username' => $request->input('user.username'),
+                'image' => $request->input('user.image'),
+                'follows' => 0
+            ]);
+            return $this->respondWithTransformer($user);
+        }else {
+            return "This email already exists";
+        }
+        //return response()->json($request->get('user'), 200, []);
+        //return response()->json($request->input('user.username'), 200, []);
+        //return response()->json($user, 200, []);
     }
 }
