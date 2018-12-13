@@ -17,7 +17,7 @@ export class LoginResolver implements Resolve<any> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> {
-    return this.loginService.sociallogin()
+    return this.loginService.sociallogin(route.params['email'])
         .pipe(map(
           data => {window.location.reload(); this.router.navigateByUrl('/')}
         ));

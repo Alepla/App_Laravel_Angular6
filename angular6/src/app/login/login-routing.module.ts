@@ -16,7 +16,7 @@ const routes: Routes = [
     canActivate: [NoLoginGuard]
   },
   {
-    path: 'sociallogin',
+    path: 'sociallogin/:email',
     component: LoginComponent,
     resolve: {
       login: LoginResolver

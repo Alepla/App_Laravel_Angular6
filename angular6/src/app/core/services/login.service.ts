@@ -11,7 +11,7 @@ import { JwtService } from './jwt.service';
 @Injectable()
 export class LoginService {
     private currentUserSubject = new BehaviorSubject<User>({} as User);
-
+    private email:String;
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
     constructor(
         private apiService: ApiService,
@@ -38,12 +38,11 @@ export class LoginService {
         ));
     }
 
-    sociallogin(): Observable<User>{
-        console.log("hola");
-        return this.apiService.get('/loginsocial')
+    sociallogin(email){
+        return this.apiService.get('/loginsocial?email='+email)
             .pipe(map(
             data => {
-                console.log(data)
+                console.log("User",data)
                 this.setAuth(data.user);
                 return data;
             }

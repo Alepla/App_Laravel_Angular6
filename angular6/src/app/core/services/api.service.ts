@@ -23,6 +23,11 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
+  getWeb(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+    return this.http.get(`${environment.api_url_web}${path}`, { params })
+      .pipe(catchError(this.formatErrors));
+  }
+
   put(path: string, body: Object = {}): Observable<any> {
     return this.http.put(
       `${environment.api_url}${path}`,
