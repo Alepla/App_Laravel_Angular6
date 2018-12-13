@@ -14,6 +14,6 @@ export class SearchService {
     
     get(filter): Observable<Video> {
         return this.apiService.get('/search?filter=' + filter)
-          .pipe(map(data => data.videos));
+          .pipe(map(data => data));
     }
 }

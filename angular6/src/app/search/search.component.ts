@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Video, VideosService, VideoListConfig } from '../core';
+import { User, Video, VideoListConfig } from '../core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 
 export class SearchComponent implements OnInit {
     videos: Video;
+    users: User;
     listConfig: VideoListConfig = {
         type: 'all',
         filters: {},
@@ -22,8 +23,9 @@ export class SearchComponent implements OnInit {
 
     ngOnInit() {
         this.route.data.subscribe(
-            (data: { search: Video }) => {
-                this.videos = data.search;
+            (search) => {
+                this.videos = search.search.videos.original.searches;
+                this.users = search.search.users.original.searches;
             }
         );
     }

@@ -1,0 +1,10 @@
+<section style="display:grid; grid-template-columns:1fr 2fr; grid-gap:10px; width: 625px; margin-bottom: 15px;">
+    <section style="display:flex; justify-content:center;">
+        <img [src]="user.image"  style="width: 135px; height: 135px; border-radius: 135px; margin-bottom: 0px;"/>
+    </section>
+    <section style=" display:flex; flex-direction:column; justify-content: center;">
+        <h3 style="font-weight:bold; font-size: 20px;">{{user.username}}</h3>
+        <div><label>{{user.followers}} suscriptores · 1000 videos</label></div>
+        <div><label>{{user.bio}}</label></div>
+    </section>
+</section>

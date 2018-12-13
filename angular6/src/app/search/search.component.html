@@ -1,5 +1,11 @@
-<app-video-list 
-    *ngIf="videos.length"
-    class="list__videos" 
-    [data]="videos" ></app-video-list>
+<article>
+    <app-video-list 
+        *ngIf="videos.length"
+        class="list__videos" 
+        [data]="videos" ></app-video-list>
+    <app-user-list  
+        *ngFor="let user of users" 
+        [user]="user"></app-user-list>
+</article>
+
 <label *ngIf="!videos.length">Search not found</label>

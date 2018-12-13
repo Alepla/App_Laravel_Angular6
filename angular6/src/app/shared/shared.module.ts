@@ -10,6 +10,7 @@ import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
 import {VideoListComponent,VideoPreviewComponent} from './video-helpers';
 import {SearchComponent} from './search';
+import { UserListComponent} from './user-helpers';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {SearchComponent} from './search';
     ShowAuthedDirective,
     VideoListComponent,
     VideoPreviewComponent,
-    SearchComponent
+    SearchComponent,
+    UserListComponent
   ],
   exports: [
     ArticleListComponent,
@@ -47,7 +49,8 @@ import {SearchComponent} from './search';
     ShowAuthedDirective,
     VideoListComponent,
     VideoPreviewComponent,
-    SearchComponent
+    SearchComponent,
+    UserListComponent
   ]
 })
 export class SharedModule {}

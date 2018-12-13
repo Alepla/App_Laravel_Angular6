@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     title: String = '';
     loginForm: FormGroup;
     isSubmitting = false;
+    isDisabled = false;
     errors: Errors = {errors: {}};
 
     constructor(
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
     submitForm(){
         this.errors = {errors: {}};
         this.isSubmitting = true;
+        this.isDisabled = true;
         
         if(this.loginForm.status === "VALID"){
             this.loginService
@@ -57,8 +59,11 @@ export class LoginComponent implements OnInit {
                 err => {
                     this.errors = err;
                     this.isSubmitting = false;
+                    this.isDisabled = false;
                 }
             );
+        }else{
+            this.isDisabled = false;
         }
     }
 

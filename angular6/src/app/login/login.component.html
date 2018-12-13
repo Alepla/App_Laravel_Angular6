@@ -7,10 +7,10 @@
                 <a style="color:#3e9be4;" [routerLink]="['/login']" *ngIf="loginType === 'register'">Have an account?</a>
                 <a style="color:#3e9be4;" [routerLink]="['/register']" *ngIf="loginType === 'login'">Need an account?</a>
             </p>
-            <a href="http://localhost:8000/api/login/google">Google</a>
+            <a style="color:#3e9be4;" href="http://localhost:8000/api/login/google">Google</a>
             <app-list-errors [errors]="errors"></app-list-errors>
             <form [formGroup]='loginForm'>
-                <fieldset [disabled]="isSubmitting">
+                <fieldset [disabled]="isDisabled">
                 <fieldset class="form-group"
                 *ngIf="loginType === 'register'">
                     <input
