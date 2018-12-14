@@ -8,6 +8,7 @@ use Auth;
 use App\User;
 use App\SocialLogin;
 use Session;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Api\LoginUser;
 use App\Http\Requests\Api\RegisterUser;
 use App\RealWorld\Transformers\UserTransformer;
@@ -85,30 +86,19 @@ class AuthController extends ApiController
                 ]);
             }
             
-            return redirect()->to('http://localhost:4200/sociallogin/'.$user->email);
-            /*$user = User::find(1);
-            Auth::login($user);*/
-            //auth()->login($user);
-            //return redirect('http://localhost:4200');
-            /*session(['Email' => $user->email]);
-            session(['user' => $user]);*/
-            //return redirect('http://localhost:4200/sociallogin');
+            Storage::disk('local')->put('file.txt',$this->respondWithTransformer($valUser));
+            return redirect()->to('http://localhost:4200/sociallogin');
         } catch (SocialAuthException $e) {
             echo 'Not User';
         }
     }
     public function loginsocial(Request $request)
     {
-        //return '{"user":{"email":"daniortizgar@gmail.com","token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMzLCJpc3MiOiJodHRwczpcL1wvbG9jYWxob3N0OjgwMDBcL2xvZ2luc29jaWFsIiwiaWF0IjoxNTQ0NTQwMzYwLCJleHAiOjE1NDk3MjQzNjAsIm5iZiI6MTU0NDU0MDM2MCwianRpIjoiazhObjVIR01CQWVWRmd5cCJ9.AAnqj4rQF_5PmZOeqBOOyPhvnUrboDwzXjXVJLAyJCA","username":"Dani Ortiz","bio":null,"image":"https:\/\/lh5.googleusercontent.com\/-8VxDmCmO70M\/AAAAAAAAAAI\/AAAAAAAAAdg\/Tj0lMDMweFA\/photo.jpg?sz=50","followers":"0"}}';
-        /*$user = User::find(1);
-        Auth::login($user);*/
-        $user = User::where('email', '=', $request->input("email"))->first();
-        return $this->respondWithTransformer($user);
-        //return $user;
-        /*if (Session::has('Email')) {
-            $user = User::where('email','=',Session::get('Email'))->first();
-            return $this->respondWithTransformer($user);
+        $exists = Storage::disk('local')->exists('file.txt');
+        if($exists){
+            $user = Storage::disk('local')->get('file.txt');
+            Storage::disk('local')->delete('file.txt');
         }
-        return "Error";*/
+        return explode('GMT',$user)[1];
     }
 }

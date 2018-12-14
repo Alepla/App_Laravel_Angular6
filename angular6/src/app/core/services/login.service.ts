@@ -38,11 +38,10 @@ export class LoginService {
         ));
     }
 
-    sociallogin(email){
-        return this.apiService.get('/loginsocial?email='+email)
+    sociallogin(){
+        return this.apiService.get('/loginsocial')
             .pipe(map(
             data => {
-                console.log("User",data)
                 this.setAuth(data.user);
                 return data;
             }
