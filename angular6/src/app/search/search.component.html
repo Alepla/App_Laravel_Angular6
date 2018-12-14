@@ -1,11 +1,25 @@
 <article>
+    <app-user-list  
+    *ngIf="uniqueUser" 
+        [user]="uniqueUser"></app-user-list>
+    <hr *ngIf="uniqueUser " />
+    <h5 *ngIf="userVideos">Lo ultimo de {{nameuser}}</h5>
     <app-video-list 
-        *ngIf="videos.length"
+        *ngIf="userVideos"
+        class="list__videos" 
+        [data]="userVideos" ></app-video-list>   
+    <hr *ngIf="userVideos"/>
+    <h5 *ngIf="videos.length > 0">Videos relacionados con la busqueda</h5> 
+    <app-video-list 
+        *ngIf="videos.length > 0"
         class="list__videos" 
         [data]="videos" ></app-video-list>
-    <app-user-list  
-        *ngFor="let user of users" 
-        [user]="user"></app-user-list>
+    <h5 *ngIf="users.length > 0">Creadores relacionados con la busqueda</h5> 
+    <section *ngIf="users">
+        <app-user-list  
+            *ngFor="let user of users" 
+            [user]="user"></app-user-list>
+    </section>
 </article>
 
-<label *ngIf="!videos.length">Search not found</label>
+<label *ngIf="videos.length < 1 && !users.length > 0 && !userVideos">Search not found</label>
