@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, Video, VideoListConfig } from '../core';
+import { User, Video, VideoListConfig} from '../core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class SearchComponent implements OnInit {
+
     videos: Video;
     users: User;
     userVideos: Video;
@@ -51,7 +52,6 @@ export class SearchComponent implements OnInit {
                 arr = [];
 
                 if(search.search.userVideos.original.searches.length > 0){
-                    console.log(search.search.userVideos.original.searches.length)
                     search.search.videos.original.searches.forEach(element => {
                         val = search.search.userVideos.original.searches.find(({id}) => element.id === id);
                         if(!val){
@@ -68,4 +68,5 @@ export class SearchComponent implements OnInit {
         );
     }
 
+    
 }

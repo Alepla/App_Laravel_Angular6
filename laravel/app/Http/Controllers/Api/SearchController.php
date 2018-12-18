@@ -33,4 +33,13 @@ class SearchController extends ApiController
 
         return $search;
     }
+    public function searchautofilter(Request $request){
+        $videos = Video::where('title', 'like', "%" . $request->input("filter") . "%")/*->orderBy('views', 'desc')*/->get();
+        $users = User::where('username', 'like', "%" . $request->input("filter") . "%")->orderBy('followers', 'desc')->get();
+
+        $search['videos'] = $this->respondWithTransformer($videos);
+        $search['users'] = $this->respondWithTransformer($users);
+
+        return $search;
+    }
 }
