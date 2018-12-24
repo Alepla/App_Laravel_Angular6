@@ -11,3 +11,4 @@ export * from './videos.service';
 export * from './labels.service';
 export * from './login.service';
 export * from './search.service';
+export * from './upload.service';

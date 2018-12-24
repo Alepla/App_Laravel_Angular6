@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserService, UploadService } from '../core';
+import { AngularFireStorage } from '@angular/fire/storage';
+
 
 @Component({
     selector: 'app-upload-page',
@@ -8,8 +11,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 
 export class UploadComponent {
     uploadForm : FormGroup;
-    stateControl = new FormControl();
-    categoryControl = new FormControl();
+    state = new FormControl();
+    category = new FormControl();
     tagControl = new FormControl();
     isSubmiting = false;
     states = ["Public","Private","Subscribers"];
@@ -19,14 +22,31 @@ export class UploadComponent {
     tags = [];
     uploadedImage = null;
 
+    imageSrc: any;
+    videoSrc: any;
+    userFile: any;
+    imageSelected: any;
+    imageHref: any;
+    videoHref: any;
+
     constructor(
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private uploadService: UploadService,
+        private userService: UserService,
+        private storage: AngularFireStorage
     ){
+
+        
         this.uploadForm = this.fb.group({
             title: ['',Validators.required],
-            stateControl: ['Public'],
-            categoryControl: ['Blogs'],
-            description: ['',[Validators.required,Validators.minLength(30),Validators.maxLength(200)]]
+            state: ['Public'],
+            category: ['Blogs'],
+            description: ['',[Validators.required,Validators.minLength(30),Validators.maxLength(200)]],
+            slug: '',
+            video: '',
+            image: '',
+            userid: '',
+            tags: []
         });
     }
 
@@ -38,9 +58,40 @@ export class UploadComponent {
         }
         this.tagControl.reset('');
     }
+    savePctv(pctv){
+        this.pctv = pctv;
+    }
+    ImageTask;VideoTask;uploadProgressI;uploadProgressV;pctv;pcti;
+    saveFile(event,file){
+        this.userFile = event.target.files[0];
+        this.imageSelected = this.userFile.name;
+        console.log(event.target.files)
+        if (event.target.files && event.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e: any) => {
+                if(file === "image"){
+                    const randomId = Math.random().toString(36).substring(2);
+                    this.ImageTask = this.storage.upload('/images/'+randomId,event.target.files[0]);
+                    this.uploadProgressI = this.ImageTask.percentageChanges();
+                    this.imageSrc = e.target.result;
+                }
+                else{
+                    const randomId = Math.random().toString(36).substring(2);
+                    this.VideoTask = this.storage.upload('/videos/'+randomId,event.target.files[0]);
+                    this.uploadProgressV = this.VideoTask.percentageChanges();
+                    console.log(this.uploadProgressV);
+                    this.videoSrc = e.target.result;
+                }
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
 
-    saveImage(e){
-        this.uploadedImage = e.target.files[0];
+    delFile(file){
+        if(file === "image")
+            this.imageSrc = null;
+        else
+            this.videoSrc = null;
     }
 
     removeTag(tagName: string) {
@@ -49,9 +100,27 @@ export class UploadComponent {
 
     submitForm(){
         this.isSubmiting = true;
-        if (this.uploadForm.invalid) {
+        if (this.uploadForm.invalid || !this.userService.getCurrentUser() || this.tags.length < 1) {
             return;
         }
-        console.log(this.uploadForm.value)
+        
+        this.ImageTask.task.snapshot.ref.getDownloadURL().then(data => {
+            this.uploadForm.value.image = data;
+            this.VideoTask.task.snapshot.ref.getDownloadURL().then(data => {
+                this.uploadForm.value.video = data;
+
+                let user = this.userService.getCurrentUser();
+                this.uploadForm.value.userid = user.id;
+                this.uploadForm.value.tags = this.tags;
+
+                let slug = this.uploadForm.value.title.toLowerCase();
+                this.uploadForm.value.slug = slug.replace(/\s/g,"-");
+                
+                this.uploadService.saveVideo(this.uploadForm.value).subscribe((data) => {
+                    console.log(data);
+                });
+            },err => {return});
+        },err => {return})
+        
     }
 }
