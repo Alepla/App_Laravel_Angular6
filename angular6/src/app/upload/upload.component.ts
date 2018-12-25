@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService, UploadService } from '../core';
+import { Errors, UserService, UploadService } from '../core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 
 @Component({
@@ -28,12 +30,15 @@ export class UploadComponent {
     imageSelected: any;
     imageHref: any;
     videoHref: any;
+    errors: Errors = {errors: {}};
 
     constructor(
         private fb: FormBuilder,
         private uploadService: UploadService,
         private userService: UserService,
-        private storage: AngularFireStorage
+        private storage: AngularFireStorage,
+        private router: Router,
+        private toastr: ToastrManager
     ){
 
         
@@ -99,6 +104,7 @@ export class UploadComponent {
     }
 
     submitForm(){
+        this.errors = {errors: {}};
         this.isSubmiting = true;
         if (this.uploadForm.invalid || !this.userService.getCurrentUser() || this.tags.length < 1) {
             return;
@@ -117,7 +123,12 @@ export class UploadComponent {
                 this.uploadForm.value.slug = slug.replace(/\s/g,"-");
                 
                 this.uploadService.saveVideo(this.uploadForm.value).subscribe((data) => {
-                    console.log(data);
+                    console.log(data)
+                    this.toastr.successToastr('You were created a video correctly.');
+                    this.router.navigateByUrl('/');
+                },
+                err => {
+                    this.errors = err;
                 });
             },err => {return});
         },err => {return})

@@ -22,7 +22,7 @@ class UploadVideo extends ApiRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|min:3|max:40',
+            'title' => 'required|string|min:3|max:100',
             'state' => 'required',
             'category' => 'required|string',
             'tags' => 'required',
