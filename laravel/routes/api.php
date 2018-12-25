@@ -56,5 +56,5 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('loginsocial', 'AuthController@loginsocial');
 
     Route::post('upload','VideoController@upload');
-    
+    Route::match(['put', 'patch'], 'sumview','VideoController@sumView');
 });

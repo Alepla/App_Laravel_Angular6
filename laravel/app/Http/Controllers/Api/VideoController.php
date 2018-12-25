@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\UploadVideo;
 
 use App\Video;
+use App\User;
 use App\RealWorld\Paginate\Paginate;
 use App\RealWorld\Filters\VideoFilter;
 use App\RealWorld\Transformers\VideoTransformer;
@@ -33,6 +34,16 @@ class VideoController extends ApiController {
         return $this->respondWithTransformer($video);
     }
 
+    public function sumView(Request $request)
+    {   
+
+        $video  = Video::where('id', $request->input('video.id'))->first();
+
+        $video->increment('views', 1, ['id' => $request->input('video.id')]);
+        
+        return $this->respondWithTransformer($video);
+    }
+
     public function upload(UploadVideo $request){
         
         $video = Video::create([
@@ -44,6 +55,7 @@ class VideoController extends ApiController {
             'category' => $request->input('video.category'),
             'state' => $request->input('video.state'),
             'category' => $request->input('video.category'),
+            'views' => 0,
             'thumbnail' => $request->input('video.image')
         ]);
         

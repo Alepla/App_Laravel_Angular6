@@ -18,20 +18,19 @@ export class VideoComponent implements OnInit {
     };
 
     constructor(
-        private route: ActivatedRoute
-        //private VideoService: VideosService,
+        private route: ActivatedRoute,
+        private videoService: VideosService,
     ) { }
 
     ngOnInit() {
         this.route.data.subscribe(
-            (data: { video: Video }) => {
-                this.video = data.video;
-                console.log(this.video)
-            }
-        );
-        //this.setListTo('all',{})
-    }
-
+        (data: { video: Video }) => {
+            this.video = data.video;
+            this.videoService.sumView(this.video).subscribe(data => {
+                this.video.views  = data.views;
+            });
+        });
+    }   
     setListTo(type: string = '', filters: Object = {}) {
         // Otherwise, set the list object
         this.listConfig = {type: type, filters: filters, paginate: false};

@@ -36,4 +36,9 @@ export class VideosService {
         return this.apiService.get('/video/')
           .pipe(map(data => data.video));
     }
+
+    sumView(video): Observable<Video> {
+        return this.apiService.put('/sumview',{video})
+          .pipe(map(data => data.video));
+    }
 }

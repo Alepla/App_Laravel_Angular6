@@ -7,7 +7,7 @@ export interface Video {
     thumbnail: string;
     state: string;
     category: string;
-    viwes: number;
+    views: number;
     createdAt: string;
     updatedAt: string;
     time: string;
