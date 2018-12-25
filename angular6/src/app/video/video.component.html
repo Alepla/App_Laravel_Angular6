@@ -5,7 +5,9 @@
                         Your browser does not support HTML5 video.
                 </video>
                 <label class="label__video title__video">{{video.title}}</label><br />
-                <label class="label__video">imageuser - nameuser</label><br />
+                <label class="label__video title__views">1000 viwes</label>
+                <hr />
+                <label class="label__video user_video"><img style="border-radius: 40px;" width="40px" [src]="video.creator.image" /> {{video.creator.username}}</label><br /><br />
                 <label class="label__video desc__video">{{video.description}}</label>
         </section>
         <app-video-list class="list__videos"[limit]="6" [config]="listConfig" [exclude]="video.id"></app-video-list>
