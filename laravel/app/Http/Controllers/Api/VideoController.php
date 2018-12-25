@@ -40,11 +40,11 @@ class VideoController extends ApiController {
             'title' => $request->input('video.title'),
             'slug' => $request->input('video.slug'),
             'description' => $request->input('video.description'),
-            'link' => $request->input('video.video'),
+            'video' => $request->input('video.video'),
             'category' => $request->input('video.category'),
-            /*'state' => $request->input('video.state'),
+            'state' => $request->input('video.state'),
             'category' => $request->input('video.category'),
-            'thumblain' => $request->input('video.image')*/
+            'thumbnail' => $request->input('video.image')
         ]);
         
         return $this->respondWithTransformer($video);

@@ -3,7 +3,10 @@ export interface Video {
     slug: string;
     title: string;
     description: string;
-    link: string;
+    video: string;
+    thumbnail: string;
+    state: string;
+    category: string;
     createdAt: string;
     updatedAt: string;
     time: string;

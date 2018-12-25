@@ -26,6 +26,7 @@ export class VideoComponent implements OnInit {
         this.route.data.subscribe(
             (data: { video: Video }) => {
                 this.video = data.video;
+                console.log(this.video)
             }
         );
         //this.setListTo('all',{})

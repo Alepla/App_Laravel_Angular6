@@ -18,7 +18,10 @@ class Video extends Model
         'user_id',
         'title',
         'description',
-        'link'
+        'video',
+        'thumbnail',
+        'state',
+        'category'
     ];
 
     protected $with = [

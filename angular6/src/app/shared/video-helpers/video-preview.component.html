@@ -1,5 +1,5 @@
 <div class="contenedor__preview" [routerLink]="['/video', video.slug]">
-    <video width="100%" [src]="video.link">
+    <video width="100%" poster={{video.thumbnail}}>
     </video>
     <section>
         <p class="preview__label preview__title">{{video.title}}</p>
