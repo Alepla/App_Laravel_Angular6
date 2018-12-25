@@ -21,7 +21,8 @@ class Video extends Model
         'video',
         'thumbnail',
         'state',
-        'category'
+        'category',
+        'viwes',
     ];
 
     protected $with = [

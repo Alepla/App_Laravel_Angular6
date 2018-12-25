@@ -68,6 +68,7 @@ $factory->define(App\Video::class, function (\Faker\Generator $faker) {
         'category' => $faker->sentence,
         'state' => $faker->sentence,
         'thumbnail' => $faker->sentence,
+        'views' => $faker->numberBetween(20000, 1000000),
         'created_at' => \Carbon\Carbon::now()->subSeconds($reduce--),
     ];
 });

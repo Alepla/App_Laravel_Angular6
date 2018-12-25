@@ -23,6 +23,7 @@ class CreateVideosTable extends Migration
             $table->string('thumbnail');
             $table->string('state');
             $table->string('category');
+            $table->integer('views');
             $table->timestamps();
 
             $table->unique(['id', 'slug', 'video']);
