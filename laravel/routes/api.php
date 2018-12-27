@@ -55,15 +55,12 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('login/{provider}/callback', 'AuthController@sociallogin')->where(['provider' => 'google']);
     Route::get('loginsocial', 'AuthController@loginsocial');
 
-<<<<<<< HEAD
     Route::post('videos/{video}/like', 'LikeController@add');
     Route::delete('videos/{video}/like', 'LikeController@remove');
 
     Route::post('videos/{video}/dislike', 'DisLikeController@add');
     Route::delete('videos/{video}/dislike', 'DisLikeController@remove');
     
-=======
     Route::post('upload','VideoController@upload');
     Route::match(['put', 'patch'], 'sumview','VideoController@sumView');
->>>>>>> 7d372f8955d434fb0e4fb75228938876e958f6a7
 });
