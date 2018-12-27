@@ -12,8 +12,13 @@ export class SearchService {
         private apiService: ApiService
     ) {}
     
-    get(filter): Observable<Video> {
+    get(filter): Observable<any> {
         return this.apiService.get('/search?filter=' + filter)
+          .pipe(map(data => data));
+    }
+
+    getAutoFilter(filter): Observable<any> {
+        return this.apiService.get('/searchautofilter?filter=' + filter)
           .pipe(map(data => data));
     }
 }

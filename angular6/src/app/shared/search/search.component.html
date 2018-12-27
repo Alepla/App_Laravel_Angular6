@@ -1,8 +1,19 @@
-<form [formGroup]="searchForm" style="display:grid; grid-template-columns:2fr 1fr;">
-    <fieldset>
-            <input type="text" placeholder="Search" formControlName="name" />
-    </fieldset>
-    <fieldset>
-        <button (click)="searchName()">Search</button>
-    </fieldset>
+<form class="example-form" style="width:96%;" (submit)="searchName(dataSubmit)">
+    <mat-form-field class="example-full-width" style="width:80%;">
+        <input type="text" placeholder="Search"
+            (input)="inputChange($event.target.value); dataSubmit = $event.target.value;"
+            matInput 
+            [formControl]="searchTerm" 
+            [matAutocomplete]="auto">
+
+        <mat-autocomplete #auto="matAutocomplete" 
+            (optionSelected)='searchName($event.option.value); dataSubmit = $event.option.value;'>
+            <mat-option *ngFor="let item of infoAuto" [value]="item" >
+                {{ item }}
+            </mat-option>
+        </mat-autocomplete>
+        
+    </mat-form-field>
+
+    <button (click)="searchName(dataSubmit)">Search</button>
 </form>

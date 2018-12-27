@@ -6,13 +6,17 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { ApiService } from "./api.service";
 import { User } from "../models";
 import { map } from "rxjs/operators/map";
+import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
 import { JwtService } from './jwt.service';
 
 @Injectable()
 export class LoginService {
     private currentUserSubject = new BehaviorSubject<User>({} as User);
-    private email:String;
+    public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
+    
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
+    public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+
     constructor(
         private apiService: ApiService,
         private jwtService: JwtService
@@ -26,6 +30,15 @@ export class LoginService {
         // Set auth status to false
         this.isAuthenticatedSubject.next(true);
     }
+
+    purgeAuth() {
+        // Remove JWT from localstorage
+        this.jwtService.destroyToken();
+        // Set current user to an empty object
+        this.currentUserSubject.next({} as User);
+        // Set auth status to false
+        this.isAuthenticatedSubject.next(false);
+    }
     
     attemptLogin(type,data): Observable<User> {
         const route = (type === 'login') ? '/login' : '';
@@ -36,6 +49,10 @@ export class LoginService {
                 return data;
             }
         ));
+    }
+
+    getCurrentUser(): User {
+        return this.currentUserSubject.value;
     }
 
     sociallogin(){

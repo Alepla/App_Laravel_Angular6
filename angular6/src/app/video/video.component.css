@@ -15,6 +15,9 @@
     font-size: 25px;
     font-weight: bold;
 }
+.user_video {
+    font-weight: bold;
+}
 .desc__video{
     font-size: 17px;
 }

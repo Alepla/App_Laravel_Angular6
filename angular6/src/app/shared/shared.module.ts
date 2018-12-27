@@ -11,6 +11,7 @@ import { ShowAuthedDirective } from './show-authed.directive';
 import {VideoListComponent,VideoPreviewComponent} from './video-helpers';
 import {SearchComponent} from './search';
 import { UserListComponent} from './user-helpers';
+import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { UserListComponent} from './user-helpers';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   declarations: [
     ArticleListComponent,

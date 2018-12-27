@@ -17,9 +17,14 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
+        'user_id',
         'title',
         'description',
-        'link'
+        'video',
+        'thumbnail',
+        'state',
+        'category',
+        'views',
     ];
 
     protected $with = [

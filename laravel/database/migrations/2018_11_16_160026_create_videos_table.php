@@ -19,10 +19,14 @@ class CreateVideosTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('description');
-            $table->string('link');
+            $table->string('video');
+            $table->string('thumbnail');
+            $table->string('state');
+            $table->string('category');
+            $table->integer('views');
             $table->timestamps();
 
-            $table->unique(['id', 'slug', 'link']);
+            $table->unique(['id', 'slug', 'video']);
 
             $table->foreign('user_id')
                 ->references('id')

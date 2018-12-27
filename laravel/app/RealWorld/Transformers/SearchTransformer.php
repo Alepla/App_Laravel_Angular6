@@ -11,19 +11,22 @@ class SearchTransformer extends Transformer
         if($search['slug']){
             return [
                 'id'                => $search['id'],
-                'slug'              => $search['slug'],
-                'title'             => $search['title'],
-                'description'       => $search['description'],
-                'link'              => $search['link'],
-                'labelList'         => $search['labelList'],
-                'createdAt'         => $search['created_at']->toAtomString(),
-                'updatedAt'         => $search['updated_at']->toAtomString(),
-                'creator' => [
-                    'username'  => $search['user']['username'],
-                    'bio'       => $search['user']['bio'],
-                    'image'     => $search['user']['image'],
-                    'following' => $search['user']['following'],
-                ]
+            'slug'              => $search['slug'],
+            'title'             => $search['title'],
+            'description'       => $search['description'],
+            'video'              => $search['video'],
+            'thumbnail'              => $search['thumbnail'],
+            'state'              => $search['state'],
+            'category'              => $search['category'],
+            'labelList'         => $search['labelList'],
+            'createdAt'         => $search['created_at']->toAtomString(),
+            'updatedAt'         => $search['updated_at']->toAtomString(),
+            'creator' => [
+                'username'  => $search['user']['username'],
+                'bio'       => $search['user']['bio'],
+                'image'     => $search['user']['image'],
+                'following' => $search['user']['following'],
+            ]
             ];
         }else{
             return [

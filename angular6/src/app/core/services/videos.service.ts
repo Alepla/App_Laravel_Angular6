@@ -37,6 +37,7 @@ export class VideosService {
           .pipe(map(data => data.video));
     }
 
+<<<<<<< HEAD
     like(slug): Observable<Video> {
         return this.apiService.post('/videos/' + slug + '/like');
     }
@@ -51,5 +52,10 @@ export class VideosService {
 
     notdislike(slug): Observable<Video> {
         return this.apiService.delete('/videos/' + slug + '/dislike');
+=======
+    sumView(video): Observable<Video> {
+        return this.apiService.put('/sumview',{video})
+          .pipe(map(data => data.video));
+>>>>>>> 7d372f8955d434fb0e4fb75228938876e958f6a7
     }
 }

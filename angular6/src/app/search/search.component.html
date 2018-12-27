@@ -2,7 +2,7 @@
     <app-user-list  
     *ngIf="uniqueUser" 
         [user]="uniqueUser"></app-user-list>
-    <hr *ngIf="uniqueUser " />
+    <hr *ngIf="uniqueUser" />
     <h5 *ngIf="userVideos">Lo ultimo de {{nameuser}}</h5>
     <app-video-list 
         *ngIf="userVideos"
@@ -22,4 +22,4 @@
     </section>
 </article>
 
-<label *ngIf="videos.length < 1 && !users.length > 0 && !userVideos">Search not found</label>
+<label *ngIf="videos.length < 1 && !users.length > 0 && !userVideos && !uniqueUser">Search not found</label>
