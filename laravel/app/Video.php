@@ -4,11 +4,13 @@ namespace App;
 
 use App\RealWorld\Slug\HasSlug;
 use App\RealWorld\Filters\Filterable;
+use App\RealWorld\Likes\Likeable;
+use App\RealWorld\Dislikes\Dislikeable;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
-    use HasSlug, Filterable;
+    use Likeable, HasSlug, Filterable, Dislikeable;
     /**
      * The attributes that are mass assignable.
      *
@@ -36,7 +38,7 @@ class Video extends Model
 
     public function scopeLoadRelations($query)
     {
-        //print_r($query->pluck('title'));
+
     }
 
 

@@ -4,6 +4,8 @@ export interface Video {
     title: string;
     description: string;
     link: string;
+    like: boolean;
+    dislike: boolean;
     createdAt: string;
     updatedAt: string;
     time: string;

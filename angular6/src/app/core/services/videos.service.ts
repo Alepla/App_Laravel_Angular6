@@ -36,4 +36,20 @@ export class VideosService {
         return this.apiService.get('/video/')
           .pipe(map(data => data.video));
     }
+
+    like(slug): Observable<Video> {
+        return this.apiService.post('/videos/' + slug + '/like');
+    }
+    
+    notlike(slug): Observable<Video> {
+        return this.apiService.delete('/videos/' + slug + '/like');
+    }
+
+    dislike(slug): Observable<Video> {
+        return this.apiService.post('/videos/' + slug + '/dislike');
+    }
+
+    notdislike(slug): Observable<Video> {
+        return this.apiService.delete('/videos/' + slug + '/dislike');
+    }
 }

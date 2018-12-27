@@ -7,6 +7,18 @@
                 <label class="label__video title__video">{{video.title}}</label><br />
                 <label class="label__video">imageuser - nameuser</label><br />
                 <label class="label__video desc__video">{{video.description}}</label>
+                <app-dislike-button
+                        [video]="video"
+                        (toggle)="onToggleDisLike($event)"
+                        class="pull-xs-right">
+                        {{video.dislikesCount}}
+                </app-dislike-button>
+                <app-like-button
+                        [video]="video"
+                        (toggle)="onToggleLike($event)"
+                        class="pull-xs-right">
+                        {{video.likesCount}}
+                </app-like-button>
         </section>
         <app-video-list class="list__videos"[limit]="6" [config]="listConfig" [exclude]="video.id"></app-video-list>
 </article>

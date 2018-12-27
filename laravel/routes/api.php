@@ -53,5 +53,11 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('login/{provider}', 'AuthController@auth')->name('redirectSocialLite')->where(['provider' => 'google']);
     Route::get('login/{provider}/callback', 'AuthController@sociallogin')->where(['provider' => 'google']);
     Route::get('loginsocial', 'AuthController@loginsocial');
+
+    Route::post('videos/{video}/like', 'LikeController@add');
+    Route::delete('videos/{video}/like', 'LikeController@remove');
+
+    Route::post('videos/{video}/dislike', 'DisLikeController@add');
+    Route::delete('videos/{video}/dislike', 'DisLikeController@remove');
     
 });

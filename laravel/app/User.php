@@ -4,13 +4,14 @@ namespace App;
 
 use JWTAuth;
 use App\RealWorld\Follow\Followable;
-use App\RealWorld\Favorite\HasFavorite;
+use App\RealWorld\Likes\HasLikes;
+use App\RealWorld\Dislikes\HasDislikes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, Followable, HasFavorite;
+    use Notifiable, Followable, HasLikes, HasDislikes;
 
     /**
      * The attributes that are mass assignable.

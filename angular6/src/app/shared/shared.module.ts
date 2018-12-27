@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
-import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
+import { FavoriteButtonComponent, FollowButtonComponent, LikeButtonComponent, DisLikeButtonComponent } from './buttons';
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
 import {VideoListComponent,VideoPreviewComponent} from './video-helpers';
@@ -26,6 +26,8 @@ import { UserListComponent} from './user-helpers';
     ArticleMetaComponent,
     ArticlePreviewComponent,
     FavoriteButtonComponent,
+    LikeButtonComponent,
+    DisLikeButtonComponent,
     FollowButtonComponent,
     ListErrorsComponent,
     ShowAuthedDirective,
@@ -40,6 +42,8 @@ import { UserListComponent} from './user-helpers';
     ArticlePreviewComponent,
     CommonModule,
     FavoriteButtonComponent,
+    LikeButtonComponent,
+    DisLikeButtonComponent,
     FollowButtonComponent,
     FormsModule,
     ReactiveFormsModule,

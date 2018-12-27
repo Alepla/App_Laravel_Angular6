@@ -8,6 +8,7 @@ class VideoTransformer extends Transformer
 
     public function transform($data)
     {
+        //print_r($data);
         return [
             'id'                => $data['id'],
             'slug'              => $data['slug'],
@@ -15,6 +16,10 @@ class VideoTransformer extends Transformer
             'description'       => $data['description'],
             'link'              => $data['link'],
             'labelList'         => $data['labelList'],
+            'likes'             => $data['liked'],
+            'likesCount'        => $data['liked_count'],
+            'dislike'             => $data['disliked'],
+            'dislikesCount'        => $data['disliked_count'],
             'createdAt'         => $data['created_at']->toAtomString(),
             'updatedAt'         => $data['updated_at']->toAtomString(),
             'creator' => [

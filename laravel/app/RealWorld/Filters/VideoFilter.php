@@ -17,4 +17,14 @@ class VideoFilter extends Filter
 
         return $this->builder->whereIn('id', $videoIds);
     }
+
+    protected function liked($username)
+    {
+        $user = User::whereUsername($username)->first();
+
+        $articleIds = $user ? $user->likes()->pluck('id')->toArray() : [];
+
+        return $this->builder->whereIn('id', $articleIds);
+    }
+
 }

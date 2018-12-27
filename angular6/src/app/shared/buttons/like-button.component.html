@@ -1,0 +1,7 @@
+<button class="btn btn-sm"
+ [ngClass]="{ 'disabled' : isSubmitting,
+              'btn-outline-primary': !video.like,
+              'btn-primary': video.like }"
+ (click)="toggleLike()">
+ <img src="https://img.icons8.com/material/24/000000/like.png"> <ng-content></ng-content>
+</button>

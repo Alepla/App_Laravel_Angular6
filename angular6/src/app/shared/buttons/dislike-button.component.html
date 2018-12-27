@@ -1,0 +1,7 @@
+<button class="btn btn-sm"
+ [ngClass]="{ 'disabled' : isSubmitting,
+              'btn-outline-primary': !video.dislike,
+              'btn-primary': video.dislike }"
+ (click)="toggleDisLike()">
+ <img src="https://img.icons8.com/material/24/000000/thumbs-down.png"> <ng-content></ng-content>
+</button>

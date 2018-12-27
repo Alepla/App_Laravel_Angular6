@@ -1,6 +1,5 @@
 <div class="contenedor__preview" [routerLink]="['/video', video.slug]">
-    <video width="100%" [src]="video.link">
-    </video>
+    <video width="100%" [src]="video.link"></video>
     <section>
         <p class="preview__label preview__title">{{video.title}}</p>
         <p class="preview__label preview__channel">{{video.creator.username}}</p>

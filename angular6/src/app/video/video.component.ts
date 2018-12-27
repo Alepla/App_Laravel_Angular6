@@ -25,6 +25,7 @@ export class VideoComponent implements OnInit {
     ngOnInit() {
         this.route.data.subscribe(
             (data: { video: Video }) => {
+                console.log("ConsoleVideo",data.video);
                 this.video = data.video;
             }
         );
@@ -34,5 +35,25 @@ export class VideoComponent implements OnInit {
     setListTo(type: string = '', filters: Object = {}) {
         // Otherwise, set the list object
         this.listConfig = {type: type, filters: filters, paginate: false};
+    }
+
+    onToggleLike(like: boolean) {
+        this.video['like'] = like;
+
+        if (like) {
+            this.video['likesCount']++;
+        } else {
+            this.video['likesCount']--;
+        }
+    }
+
+    onToggleDisLike(dislike: boolean) {
+        this.video['dislike'] = dislike;
+
+        if (dislike) {
+            this.video['dislikesCount']++;
+        } else {
+            this.video['dislikesCount']--;
+        }
     }
 }
