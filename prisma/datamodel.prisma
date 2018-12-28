@@ -1,0 +1,14 @@
+type video {
+  id: ID! @unique
+  userId: String!
+  title: String!
+  slug: String!
+  description: String!
+  video: String!
+  thumbnail: String!
+  state: String!
+  category: String!
+  views: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
