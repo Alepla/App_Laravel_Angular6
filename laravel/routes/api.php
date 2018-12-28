@@ -58,6 +58,11 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('videos/{video}/like', 'LikeController@add');
     Route::delete('videos/{video}/like', 'LikeController@remove');
 
+
+    Route::get('users/subscribe', 'SubscribeController@get');
+    Route::post('users/subscribe', 'SubscribeController@add');
+    Route::delete('users/subscribe', 'SubscribeController@remove');
+
     Route::post('videos/{video}/dislike', 'DisLikeController@add');
     Route::delete('videos/{video}/dislike', 'DisLikeController@remove');
     

@@ -27,6 +27,7 @@ class VideoTransformer extends Transformer
             'createdAt'         => $data['created_at']->toAtomString(),
             'updatedAt'         => $data['updated_at']->toAtomString(),
             'creator' => [
+                'id'  => $data['user']['id'],
                 'username'  => $data['user']['username'],
                 'bio'       => $data['user']['bio'],
                 'image'     => $data['user']['image'],

@@ -7,7 +7,14 @@
                 <label class="label__video title__video">{{video.title}}</label><br />
                 <label class="label__video title__views">{{video.views}} viwes</label>
                 <hr />
-                <label class="label__video user_video"><img style="border-radius: 40px;" width="40px" [src]="video.creator.image" /> {{video.creator.username}}</label><br /><br />
+                <label class="label__video user_video"><img style="border-radius: 40px;" width="40px" [src]="video.creator.image" /> {{video.creator.username}}</label>
+                <app-subscribe-button
+                        [user]="user"
+                        (toggle)="onToggleSubscribe($event)"
+                        class="btn">
+                        <label *ngIf="!user.subscribe" style="margin:0;">{{user.followers}} Subscribe</label>
+                        <label *ngIf="user.subscribe" style="margin:0;">{{user.followers}} Subscribed</label>
+                </app-subscribe-button><br /><br />
                 <label class="label__video desc__video">{{video.description}}</label>
                 <app-dislike-button
                         [video]="video"

@@ -6,6 +6,7 @@ export interface Video {
     link: string;
     like: boolean;
     dislike: boolean;
+    subscribe: boolean;
     video: string;
     thumbnail: string;
     state: string;
@@ -14,4 +15,5 @@ export interface Video {
     createdAt: string;
     updatedAt: string;
     time: string;
+    creator:any;
 }

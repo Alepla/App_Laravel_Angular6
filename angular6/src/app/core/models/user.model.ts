@@ -6,4 +6,5 @@ export interface User {
   bio: string;
   image: string;
   followers: number;
+  state: boolean;
 }

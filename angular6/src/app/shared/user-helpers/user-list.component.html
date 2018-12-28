@@ -6,5 +6,12 @@
         <h3 style="font-weight:bold; font-size: 20px;">{{user.username}}</h3>
         <div><label>{{user.followers}} suscriptores · 1000 videos</label></div>
         <div><label>{{user.bio}}</label></div>
+        <app-subscribe-button
+                [user]="user"
+                (toggle)="onToggleSubscribe($event)"
+                class="btn">
+                <label *ngIf="!user.subscribe" style="margin:0;">{{user.followers}} Subscribe</label>
+                <label *ngIf="user.subscribe" style="margin:0;">{{user.followers}} Subscribed</label>
+        </app-subscribe-button>
     </section>
 </section>

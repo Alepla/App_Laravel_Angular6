@@ -6,6 +6,7 @@ use App\Video;
 use App\User;
 use Illuminate\Http\Request;
 use App\RealWorld\Transformers\SearchTransformer;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends ApiController
 {	
@@ -15,10 +16,17 @@ class SearchController extends ApiController
     }
 
     public function index(Request $request){
+
+        $users = User::select('users.id','users.username','users.image','users.bio', DB::raw('count(users.id) as followers'))
+                ->leftJoin('subscribes', 'users.id', '=', 'subscribes.users_id')
+                ->groupBy('users.id')
+                ->where('username', 'like', "%" . $request->input("filter") . "%")
+                ->orderBy('followers', 'desc')
+                ->get();
+
         $userVideos = null;
         $videos = Video::where('title', 'like', "%" . $request->input("filter") . "%")
                          ->  orWhere('description', 'like', "%" . $request->input("filter") . "%")->get();
-        $users = User::where('username', 'like', "%" . $request->input("filter") . "%")->orderBy('followers', 'desc')->get();
 
         if($users != null){
             foreach ($users as $key => $user) {

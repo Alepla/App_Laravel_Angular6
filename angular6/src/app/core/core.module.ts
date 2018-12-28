@@ -20,7 +20,8 @@ import {
   LabelsService,
   LoginService,
   SearchService,
-  UploadService
+  UploadService,
+  SubscribeService
 } from './services';
 
 @NgModule({
@@ -44,7 +45,8 @@ import {
     LabelsService,
     LoginService,
     SearchService,
-    UploadService
+    UploadService,
+    SubscribeService
   ],
   declarations: []
 })

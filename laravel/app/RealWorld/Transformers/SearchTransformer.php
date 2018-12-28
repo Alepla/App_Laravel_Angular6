@@ -22,6 +22,7 @@ class SearchTransformer extends Transformer
             'createdAt'         => $search['created_at']->toAtomString(),
             'updatedAt'         => $search['updated_at']->toAtomString(),
             'creator' => [
+                'id'  => $search['user']['id'],
                 'username'  => $search['user']['username'],
                 'bio'       => $search['user']['bio'],
                 'image'     => $search['user']['image'],
@@ -30,6 +31,7 @@ class SearchTransformer extends Transformer
             ];
         }else{
             return [
+                'id'        => $search['id'],
                 'username'  => $search['username'],
                 'bio'       => $search['bio'],
                 'image'     => $search['image'],

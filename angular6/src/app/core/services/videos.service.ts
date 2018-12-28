@@ -42,7 +42,7 @@ export class VideosService {
     }
     
     notlike(slug): Observable<Video> {
-        return this.apiService.delete('/videos/' + slug + '/like');
+        return this.apiService.delete('/users/' + slug + '/like');
     }
 
     dislike(slug): Observable<Video> {

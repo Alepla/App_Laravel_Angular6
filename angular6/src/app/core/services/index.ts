@@ -12,3 +12,4 @@ export * from './labels.service';
 export * from './login.service';
 export * from './search.service';
 export * from './upload.service';
+export * from './subscribe.service';

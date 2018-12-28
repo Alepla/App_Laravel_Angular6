@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Video, VideosService, VideoListConfig } from '../core';
-import { ActivatedRoute } from '@angular/router';
+import { Video, VideosService, UserService, VideoListConfig, User, SubscribeService } from '../core';
+import { ActivatedRoute,Router } from '@angular/router';
+import { concatMap } from 'rxjs/operators/concatMap';
+import { of } from 'rxjs/observable/of';
 
 @Component({
     selector: 'app-article-page',
@@ -11,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class VideoComponent implements OnInit {
 
     video: Video;
+    user: User;
     listConfig: VideoListConfig = {
         type: 'all',
         filters: {},
@@ -19,13 +22,31 @@ export class VideoComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private videoService: VideosService,
+        private userService: UserService,
+        private subscribeService: SubscribeService
     ) { }
 
     ngOnInit() {
         this.route.data.subscribe(
         (data: { video: Video }) => {
             this.video = data.video;
+            this.user = this.video.creator;
+
+            this.userService.isAuthenticated.subscribe(
+                (authenticated) => {
+                  // Not authenticated? Push to login screen
+                if (!authenticated) {
+                    this.user['subscribe'] = false;
+                }else{
+                    this.subscribeService.checkSubscribe(this.video.creator.id).subscribe(data => {
+                        this.user['subscribe'] = data.state;
+                        this.user['followers'] = data.followers;
+                    });
+                }
+            });
+            
             this.videoService.sumView(this.video).subscribe(data => {
                 this.video.views  = data.views;
             });
@@ -55,6 +76,16 @@ export class VideoComponent implements OnInit {
             this.video['dislikesCount']++;
         } else {
             this.video['dislikesCount']--;
+        }
+    }
+
+    onToggleSubscribe(subscribe: boolean) {
+        this.user['subscribe'] = subscribe;
+
+        if (subscribe) {
+            this.user['followers']++;
+        } else {
+            this.user['followers']--;
         }
     }
 }
