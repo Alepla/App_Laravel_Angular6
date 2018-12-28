@@ -14,6 +14,7 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SearchModule } from './search/search.module';
+import { FollowingModule } from './following/following.module';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
@@ -25,6 +26,7 @@ import { SearchModule } from './search/search.module';
     AuthModule,
     AppRoutingModule,
     LoginModule,
+    FollowingModule,
     SearchModule,
     VideoModule
   ],

@@ -57,4 +57,9 @@ export class VideosService {
         return this.apiService.put('/sumview',{video})
           .pipe(map(data => data.video));
     }
+
+    following(user): Observable<Video> {
+        return this.apiService.get('/following?user='+user.id)
+          .pipe(map(data => data.videos));
+    }
 }

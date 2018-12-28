@@ -33,6 +33,10 @@ const routes: Routes = [
   {
     path: 'search',
     loadChildren: './search/search.module#SearchModule'
+  },
+  {
+    path: 'following',
+    loadChildren: './following/following.module#FollowingModule'
   }
 ];
 

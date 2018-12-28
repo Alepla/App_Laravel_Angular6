@@ -9,6 +9,7 @@ use App\RealWorld\Paginate\Paginate;
 use App\RealWorld\Filters\VideoFilter;
 use App\RealWorld\Transformers\VideoTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VideoController extends ApiController { 	
     public function __construct(VideoTransformer $transformer)
@@ -60,5 +61,24 @@ class VideoController extends ApiController {
         ]);
         
         return $this->respondWithTransformer($video);
+    }
+
+    public function getFollowing(Request $request)
+    {
+        $query = '';
+        $users = DB::table('subscribes')
+            ->select('users_id')
+            ->where('user_id', '=', $request->input('user'))->get();
+            
+        foreach ($users as $key => $user) {
+            if($key > 0)
+                $query .= ", " . $user->users_id;
+            else
+                $query = $user->users_id;
+        }
+
+        $videos = Video::whereIn('user_id', explode(',', $query))->orderBy('created_at', 'desc')->get();
+
+        return $this->respondWithTransformer($videos);
     }
 }

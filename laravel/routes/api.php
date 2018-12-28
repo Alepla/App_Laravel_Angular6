@@ -58,7 +58,6 @@ Route::group(['namespace' => 'Api'], function () {
     Route::post('videos/{video}/like', 'LikeController@add');
     Route::delete('videos/{video}/like', 'LikeController@remove');
 
-
     Route::get('users/subscribe', 'SubscribeController@get');
     Route::post('users/subscribe', 'SubscribeController@add');
     Route::delete('users/subscribe', 'SubscribeController@remove');
@@ -68,4 +67,6 @@ Route::group(['namespace' => 'Api'], function () {
     
     Route::post('upload','VideoController@upload');
     Route::match(['put', 'patch'], 'sumview','VideoController@sumView');
+    
+    Route::get('following', 'VideoController@getFollowing');
 });
