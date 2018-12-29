@@ -1,3 +1,6 @@
 <app-video-list 
+    *ngIf="videol.length > 0"
     class="list__videos" 
     [data]="videos" ></app-video-list>
+<label *ngIf="videol.length < 1">You don't have any subscription</label>
+    

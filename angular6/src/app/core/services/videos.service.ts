@@ -58,7 +58,7 @@ export class VideosService {
           .pipe(map(data => data.video));
     }
 
-    following(user): Observable<Video> {
+    following(user): Observable<any> {
         return this.apiService.get('/following?user='+user.id)
           .pipe(map(data => data.videos));
     }

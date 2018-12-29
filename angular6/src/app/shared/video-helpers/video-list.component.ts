@@ -62,6 +62,7 @@ export class VideoListComponent {
 
         if(this.dArray.length > 0){
             this.results = this.dArray;
+            this.calculateDate();
         }else{
             this.VideosService.query(this.query)
             .subscribe(data => {
@@ -72,8 +73,12 @@ export class VideoListComponent {
                 
                 // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
                 this.totalPages = Array.from(new Array(Math.ceil(data.videosCount / this.limit)), (val, index) => index + 1);
+                this.calculateDate();
             });
         }
+    }
+
+    calculateDate(){
         let today = new Date();
         let minutes,hours,days,months,years;
         this.results.map(data => {

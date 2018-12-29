@@ -4,14 +4,14 @@ import {  Router } from '@angular/router';
 
 
 @Component({
-    selector: 'app-following-page',
+    selector: 'app-following-pages',
     templateUrl: './following.component.html'
 })
 
 export class FollowingComponent implements OnInit {
     user: User;
     videos: Video;
-
+    videol = [];
     constructor(
         private userService: UserService,
         private videoService: VideosService,
@@ -32,8 +32,8 @@ export class FollowingComponent implements OnInit {
                 (userData: User) => {
                     this.user = userData;
                     this.videoService.following(this.user).subscribe(data => {
-                        console.log(data);
                         this.videos = data;
+                        this.videol = data;
                     })
                 }
             );
