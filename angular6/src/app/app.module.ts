@@ -16,6 +16,11 @@ import { CoreModule } from './core/core.module';
 import { SearchModule } from './search/search.module';
 import { FollowingModule } from './following/following.module';
 
+import { HttpClientModule } from '@angular/common/http';
+import { ApolloModule, Apollo } from 'apollo-angular';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
   imports: [
@@ -28,9 +33,19 @@ import { FollowingModule } from './following/following.module';
     LoginModule,
     FollowingModule,
     SearchModule,
-    VideoModule
+    VideoModule,
+    HttpClientModule,
+    ApolloModule,
+    HttpLinkModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor(apollo: Apollo, httpLink: HttpLink) {
+    apollo.create({
+      link: httpLink.create({uri: 'http://localhost:4466/'}),
+      cache: new InMemoryCache()
+    });
+  }
+}

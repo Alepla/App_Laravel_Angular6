@@ -3,18 +3,24 @@ import { Router } from '@angular/router';
 
 import { VideoListConfig, UserService, VideosService, Video, LabelsService } from '../core';
 
+import { Apollo } from 'apollo-angular';
+import { Subscription } from 'rxjs';
+import gql from 'graphql-tag';
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  videos: Subscription;
 
   constructor(
     private router: Router,
     private labelsService: LabelsService,
     private userService: UserService,
-    private videoService: VideosService
+    private videoService: VideosService,
+    private apollo: Apollo
   ) {}
 
   isAuthenticated: boolean;
@@ -56,6 +62,20 @@ export class HomeComponent implements OnInit {
     this.videoService.getBest()
     .subscribe(video => {
       this.video = video;
+    });
+
+    this.videos = this.apollo.query({
+      query: gql`
+        query videos {
+          videos {
+            id
+            title
+            description
+          }
+        }
+      `
+    }).subscribe(result => {
+      console.log(result);
     });
   }
 
