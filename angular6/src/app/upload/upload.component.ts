@@ -121,7 +121,7 @@ export class UploadComponent {
 
                 let slug = this.uploadForm.value.title.toLowerCase();
                 this.uploadForm.value.slug = slug.replace(/\s/g,"-");
-                
+                console.log(this.uploadForm.value);
                 this.uploadService.saveVideo(this.uploadForm.value).subscribe((data) => {
                     console.log(data)
                     this.toastr.successToastr('You were created a video correctly.');

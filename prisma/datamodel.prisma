@@ -12,3 +12,10 @@ type video {
   createdAt: DateTime!
   updatedAt: DateTime!
 }
+
+type label {
+  id: ID! @unique
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

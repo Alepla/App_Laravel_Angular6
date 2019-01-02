@@ -13,7 +13,8 @@ import gql from 'graphql-tag';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  videos: Subscription;
+  videosQuery: Subscription;
+  labelsQuery: Subscription;
 
   constructor(
     private router: Router,
@@ -53,29 +54,60 @@ export class HomeComponent implements OnInit {
       }
     );
     
-    this.labelsService.getAll()
+    /*this.labelsService.getAll()
     .subscribe(labels => {
+      console.log(labels);
       this.labels = labels;
       this.labelsLoaded = true;
-    });
+    });*/
 
-    this.videoService.getBest()
-    .subscribe(video => {
-      this.video = video;
-    });
-
-    this.videos = this.apollo.query({
+    this.labelsQuery = this.apollo.query({
       query: gql`
-        query videos {
-          videos {
-            id
-            title
-            description
+        query labels{
+          labels{
+            name
           }
         }
       `
     }).subscribe(result => {
-      console.log(result);
+      let labels = [];
+      result.data['labels'].map((x) => {
+        labels.push(x.name);
+      });
+      this.labels = labels;
+      this.labelsLoaded = true;
+    });
+
+    /*this.videoService.getBest()
+    .subscribe(video => {
+      this.video = video;
+    });
+
+    /**
+     *   
+      query videos{
+        videos(first:1){
+            title
+        }
+      }
+     */
+
+    this.videosQuery = this.apollo.query({
+      query: gql`
+        query video{
+          video(where: { id: "cjq9vcuke000w0973zl1t6buh" }){
+            title
+            description
+            video
+            thumbnail
+            state
+            category
+            views
+          }
+        }
+      `
+    }).subscribe(result => {
+      this.video = result.data['video'];
     });
   }
 
