@@ -37,6 +37,10 @@ const routes: Routes = [
   {
     path: 'following',
     loadChildren: './following/following.module#FollowingModule'
+  },
+  {
+    path: 'updateUser',
+    loadChildren: './updateUser/updateUser.module#UpdateUserModule'
   }
 ];
 

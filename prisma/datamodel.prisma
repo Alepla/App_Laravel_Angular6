@@ -19,3 +19,15 @@ type label {
   createdAt: DateTime!
   updatedAt: DateTime!
 }
+
+type user {
+  id: ID! @unique
+  username: String!
+  email: String!
+  password: String!
+  followers: Int!
+  bio: String!
+  image: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
