@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import { Errors, User } from '../core';
+import { Errors, User, UserService } from '../core';
 
 import { Apollo } from 'apollo-angular';
 import { Subscription } from 'rxjs';
@@ -17,10 +17,12 @@ import gql from 'graphql-tag';
     errors: Errors = {errors: {}};
     isSubmitting = false;
     user: User;
+    currentUser: User;
 
     constructor(
         private fb: FormBuilder,
         public toastr: ToastrManager,
+        private userService: UserService,
         private apollo: Apollo
     ){
         this.updateUserForm = this.fb.group({
@@ -31,35 +33,49 @@ import gql from 'graphql-tag';
     }
 
     ngOnInit() {
-        this.infoUserQuery = this.apollo.query({
-            query: gql`
-                query users{
-                    users(where: { username: "alepla" }){
-                        id
-                        username
-                        email
-                        password
-                        followers
-                        bio
-                        image
+
+        this.userService.currentUser.subscribe(
+            (userData) => {
+              this.currentUser = userData;
+              if(this.currentUser.username) {
+                this.infoUserQuery = this.apollo.query({
+                    query: gql`
+                        query users($where: userWhereInput){
+                            users(where: $where){
+                                id
+                                username
+                                email
+                                password
+                                followers
+                                bio
+                                image
+                            }
+                        }
+                    `,
+                    variables: {
+                        where: {
+                            username: this.currentUser.username
+                        }
                     }
-                }
-            `
-        }).subscribe(result => {
-            this.user = result.data['users'][0];
-            console.log(this.user.id);
-        });
+                }).subscribe(result => {
+                    this.user = result.data['users'][0];
+                });
+              }
+            }
+        );
     }
 
     get f() { return this.updateUserForm.controls; }
 
     submitForm() {
         this.isSubmitting = true;
+
         if(this.user) {
             if(!this.updateUserForm.value.username) this.updateUserForm.value.username = this.user.username;
             if(!this.updateUserForm.value.email) this.updateUserForm.value.email = this.user.email;
-            if(!this.updateUserForm.value.bio) this.updateUserForm.value.bio = this.user.username;
+            if(!this.updateUserForm.value.bio) this.updateUserForm.value.bio = this.user.bio;
         }
+
         this.apollo.mutate({
             mutation: gql`
                 mutation updateuser($data: userUpdateInput!, $where: userWhereUniqueInput!) {
@@ -86,13 +102,10 @@ import gql from 'graphql-tag';
             }
           }).subscribe(({ data }) => {
                 console.log(data);
+                this.toastr.successToastr('The data was updated succsesfully', 'Success!');
           }, (error) => {
-                console.log('there was an error sending the query', error);
+                console.log(error);
+                this.toastr.errorToastr('Something wrong was happened', 'Oops!');
           });
     }
 }
-
-/*this.toastr.successToastr('This is success toast.', 'Success!');
-this.toastr.errorToastr('This is error toast.', 'Oops!');
-this.toastr.warningToastr('This is warning toast.', 'Alert!');
-this.toastr.infoToastr('This is info toast.', 'Info');*/
