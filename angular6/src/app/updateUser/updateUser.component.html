@@ -12,8 +12,8 @@
                             <input class="form-control form-control-lg"
                                 formControlName="username" type="text"
                                 placeholder="Username"
-                                value="{{user.username}}"
-                                [ngClass]="{ 'is-invalid': isSubmitting && f.name.username }"/>
+                                ngModel="{{user.username}}"
+                                [ngClass]="{ 'is-invalid': isSubmitting && f.username.errors }"/>
     
                             <div *ngIf="isSubmitting && f.username.errors" class="text-danger">
                                 <div *ngIf="f.username.errors.required">Username is required</div>
@@ -24,7 +24,7 @@
                             <input class="form-control form-control-lg"
                                 formControlName="email" type="email"
                                 placeholder="Email"
-                                value="{{user.email}}"
+                                ngModel="{{user.email}}"
                                 [ngClass]="{ 'is-invalid': isSubmitting && f.email.errors }"/>
     
                                 <div *ngIf="isSubmitting && f.email.errors" class="text-danger">
@@ -37,7 +37,7 @@
                             <textarea class="form-control form-control-lg"
                                 formControlName="bio" 
                                 placeholder="Bio"
-                                value="{{user.bio}}"
+                                ngModel="{{user.bio}}"
                                 [ngClass]="{ 'is-invalid': isSubmitting && f.bio.errors }">
                             </textarea>
     

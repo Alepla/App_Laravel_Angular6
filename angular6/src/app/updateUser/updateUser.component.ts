@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Errors, User, UserService } from '../core';
 
 import { Apollo } from 'apollo-angular';
@@ -23,17 +24,18 @@ import gql from 'graphql-tag';
         private fb: FormBuilder,
         public toastr: ToastrManager,
         private userService: UserService,
+        private route: ActivatedRoute,
+        private router: Router,
         private apollo: Apollo
     ){
         this.updateUserForm = this.fb.group({
             username: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            bio: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(100)]]
+            email: ['', [Validators.email, Validators.required]],
+            bio: ['', [Validators.minLength(20), Validators.maxLength(100), Validators.required]]
         });
     }
 
     ngOnInit() {
-
         this.userService.currentUser.subscribe(
             (userData) => {
               this.currentUser = userData;
@@ -76,6 +78,8 @@ import gql from 'graphql-tag';
             if(!this.updateUserForm.value.bio) this.updateUserForm.value.bio = this.user.bio;
         }
 
+        if(this.updateUserForm.invalid) return;
+
         this.apollo.mutate({
             mutation: gql`
                 mutation updateuser($data: userUpdateInput!, $where: userWhereUniqueInput!) {
@@ -100,12 +104,13 @@ import gql from 'graphql-tag';
                     id: this.user.id
                 }
             }
-          }).subscribe(({ data }) => {
-                console.log(data);
-                this.toastr.successToastr('The data was updated succsesfully', 'Success!');
-          }, (error) => {
-                console.log(error);
-                this.toastr.errorToastr('Something wrong was happened', 'Oops!');
-          });
+        }).subscribe(({ data }) => {
+            console.log(data);
+            this.toastr.successToastr('The data was updated succsesfully', 'Success!');
+            this.router.navigateByUrl('/');
+        }, (error) => {
+            console.log(error);
+            this.toastr.errorToastr('Something wrong was happened', 'Oops!');
+        });
     }
 }
