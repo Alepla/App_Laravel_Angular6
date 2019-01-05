@@ -1,87 +1,76 @@
-<h1>Upload video</h1>
-<form [formGroup]="uploadForm" enctype="multipart/form-data">
-    <app-list-errors [errors]="errors"></app-list-errors>
-    <fieldset>
-        <div *ngIf="uploadProgressV | async as pctv">
-
-            <progress class="progress is-info" 
-                [value]="pctv" 
-                max="100">        
-            </progress>
-          
-            {{ pctv | number }}%
-          
-        </div>
-        
-        <input
-            style="display: none;" 
-            type="file" 
-            accept="video/*"
-            (change)="saveFile($event,'video')"
-            #videoInput />
-        <span *ngIf="!videoSrc" (click)="videoInput.click()">Add video</span>
-        <video *ngIf="videoSrc" width="720px" [src]="videoSrc || 'http://placehold.it/200x115'" controls></video>
-        <span *ngIf="videoSrc" (click)="delFile('video')">Delete video</span>
-    </fieldset>
-    <fieldset>
-        <div *ngIf="uploadProgressI | async as pcti">
-
-            <progress class="progress is-info" 
-                [value]="pcti" 
-                max="100">        
-            </progress>
+<app-list-errors [errors]="errors"></app-list-errors>
+<form [formGroup]="uploadForm" enctype="multipart/form-data" class="formUpload">
+        <fieldset>
+            <div *ngIf="uploadProgressV | async as pctv">
+                <mat-progress-bar mode="determinate" value="{{pctv | number:'1.0-0'}}" width="80%"></mat-progress-bar>
+            </div>
             
-            {{ pcti | number }}%
-                  
-        </div>
-        <input
-            style="display: none;" 
-            type="file" 
-            accept="image/*"
-            (change)="saveFile($event,'image')"
-            #imageInput />
-        <span *ngIf="!imageSrc" (click)="imageInput.click()">Add image</span>
-        <img *ngIf="imageSrc" width="200px" [src]="imageSrc"/>
-        <span *ngIf="imageSrc" (click)="delFile('image')">Delete image</span>
-    </fieldset>
-    <fieldset>
-        <input  type="text" 
-            formControlName="title" 
-            placeholder="Video title" />
-            <section *ngIf="isSubmiting && f.title.errors" class="text-danger">
-                <label *ngIf="f.title.errors.required">Title is required</label>
-            </section>
-    </fieldset>
-    <fieldset>
-        <select formControlName="state">
-            <option [value]="state" *ngFor="let state of states">{{state}}</option>
-        </select>
-    </fieldset>
-    <fieldset>
-        <select formControlName="category">
-            <option [value]="cat" *ngFor="let cat of categories">{{cat}}</option>
-        </select>
-    </fieldset>
-    <fieldset class="form-group">
-        <input class="form-control"
-            type="text"
-            placeholder="Enter tags"
-            [formControl]="tagControl"
-            (keyup.enter)="addTag()" />
-    </fieldset>
-    <fieldset>
-        <label *ngFor="let tag of tags">  
-            {{tag}}
-            <i class="ion-close-round" (click)="removeTag(tag)"></i>
-        </label>
-    </fieldset>
-    <fieldset>
-        <textarea formControlName="description"></textarea>
-        <section *ngIf="isSubmiting && f.description.errors" class="text-danger">
-            <label *ngIf="f.description.errors.required">Description is required</label>
-            <label *ngIf="f.description.errors.minlength && (f.description.dirty || f.description.touched) ">Description min length is 20</label>
-            <label *ngIf="f.description.errors.maxlength && (f.description.dirty || f.description.touched)">Description max length is 200</label>
+            <input
+                style="display: none;" 
+                type="file" 
+                accept="video/*"
+                (change)="saveFile($event,'video')"
+                #videoInput />
+            <label *ngIf="!videoSrc" (click)="videoInput.click()" class="uploadVideo">Select the video to upload</label>
+            <video *ngIf="videoSrc" width="80%" [src]="videoSrc || 'http://placehold.it/200x115'" controls></video>
+        </fieldset>
+        <fieldset>
+            <div *ngIf="uploadProgressI | async as pcti">
+                <mat-progress-bar mode="determinate" value="{{pcti | number:'1.0-0'}}" width="98%"></mat-progress-bar>
+            </div>
+            <input
+                style="display: none;" 
+                type="file" 
+                accept="image/*"
+                (change)="saveFile($event,'image')"
+                #imageInput />
+            <label *ngIf="!imageSrc" (click)="imageInput.click()" class="uploadVideo">Add image</label>
+            <img *ngIf="imageSrc" width="98%" height="200px"  [src]="imageSrc"/>
+        </fieldset>
+        <fieldset class="form-group margin-10px">
+            <input  type="text" 
+                formControlName="title" 
+                placeholder="Video title"
+                class="form-control" />
+                <section *ngIf="isSubmiting && f.title.errors" class="text-danger">
+                    <label *ngIf="f.title.errors.required">Title is required</label>
+                </section>
+        </fieldset>
+        <section>
+            <fieldset class="form-group">
+                <input class="form-control"
+                    type="text"
+                    placeholder="Enter tags"
+                    [formControl]="tagControl"
+                    (keyup.enter)="addTag()" />
+            </fieldset>
+            <fieldset>
+                <label *ngFor="let tag of tags">  
+                    {{tag}}
+                    <i class="ion-close-round" (click)="removeTag(tag)"></i>
+                </label>
+            </fieldset>
         </section>
-    </fieldset>
+        <section class="selectsUpload">
+            <fieldset class="margin-10px">
+                <select formControlName="state" class="form-control">
+                    <option [value]="state" *ngFor="let state of states">{{state}}</option>
+                </select>
+            </fieldset>
+            <fieldset class="margin-10px">
+                <select formControlName="category" class="form-control">
+                    <option [value]="cat" *ngFor="let cat of categories">{{cat}}</option>
+                </select>
+            </fieldset>
+        </section>
+        <section></section>
+        <fieldset class="margin-10px">
+            <textarea formControlName="description" class="form-control ng-untouched" style="height:150px;"></textarea>
+            <section *ngIf="isSubmiting && f.description.errors" class="text-danger">
+                <label *ngIf="f.description.errors.required">Description is required</label>
+                <label *ngIf="f.description.errors.minlength && (f.description.dirty || f.description.touched) ">Description min length is 20</label>
+                <label *ngIf="f.description.errors.maxlength && (f.description.dirty || f.description.touched)">Description max length is 200</label>
+            </section>
+        </fieldset>
 </form>
-<button [disabled]="!videoSrc && !imageSrc" (click)="submitForm()">Save video</button>
+<button [disabled]="!videoSrc && !imageSrc" (click)="submitForm()" class="btn btn-lg pull-xs-right btn-primary settings-button" >Save video</button>

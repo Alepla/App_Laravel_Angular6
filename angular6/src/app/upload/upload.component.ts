@@ -8,7 +8,8 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
     selector: 'app-upload-page',
-    templateUrl: './upload.component.html'
+    templateUrl: './upload.component.html',
+    styleUrls: ['./upload.component.css']
 })
 
 export class UploadComponent {
@@ -19,7 +20,7 @@ export class UploadComponent {
     isSubmiting = false;
     states = ["Public","Private","Subscribers"];
     categories = [  "Blogs","Motor","Music","Animals","Sports","ESports","travels",
-                    "videogames","Comedy","Entertainment","Notices","Clothing","Education",
+                    "videogames","Comedy","Entertainment","Notices","Clothing",
                     "Education","Science","ONG"];
     tags = [];
     uploadedImage = null;
